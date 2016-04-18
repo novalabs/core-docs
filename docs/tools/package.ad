@@ -1,0 +1,51 @@
+[[coretools-corepackage]]
+The CorePackage.py command
+--------------------------
+`CorePackage.py` is a command line tools that permits to:
+
+. list the content of a package
+. generate the code of a package
+
+TIP: It is possible to use kbd:[TAB] to invoke sub-command and/or package name completion.
+
+ls
+^^
+The `ls` command lists the content of a package.
+
+It can be used:
+
+* inside a package directory without any path or package name (e.g.: [listing.console]`$ CorePackage.py ls`)
+* specifying the path to a package directory (e.g.: [listing.console]`$ CorePackage.py ls <path-to-package>`)
+
+For system packages it is also possible to specify the name of the package (e.g.: [listing.console]`$ CorePackage.py ls led`). +
+For this last feature to work a `NOVA_CORE_ROOT` environment variable must be set with the path to the Core distribution.
+
+.Example
+================
+[listing.console]`$ CorePackage.py ls`
+
+produces:
+
+[listing.console]
+----
+╒══════════════════════════════════════════════════════════════════════════════╕
+│ PACKAGE                                                                      │
+╘══════════════════════════════════════════════════════════════════════════════╛
+Name: led
+Description: LED Nodes
+Root: packages/led
+
+
+
+=== CONFIGURATIONS =============================================================
+NS: led
+Name: PublisherConfiguration
+Description: LED Publisher node configuration
+Source: configurations/PublisherConfiguration.json
+
+NS: led
+Name: SubscriberConfiguration
+Description: LED Subscriber node configuration
+Source: configurations/SubscriberConfiguration.json
+----
+================

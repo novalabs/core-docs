@@ -1,0 +1,38 @@
+[[coreworkspace-reference]]
+Workspace
+---------
+
+[[coreworkspace-overview]]
+Overview
+~~~~~~~~
+A workspace comprehends:
+
+* build targets
+* custom packages
+* custom modules
+
+Workspaces are processed by the link:../tools/index.html#coretools-coreworkspace[CoreWorkspace.py] command line tool.
+
+From a Core user point of view a workspace is nothing but a directory that meets the following requirements:
+
+. it contains a file named `WORKSPACE.json`
+. it have a well defined structure
+
+[[coreworkspace-json]]
+WORKSPACE.json
+~~~~~~~~~~~~~~
+The `WORKSPACE.json` file describes the workspace.
+
+The file must be valid according to an Apache Avro footnoteref:[AVRO] schema.
+
+.Example: `WORKSPACE.json` file
+[source,json,numbered]
+----
+{
+  "name": "Workspace", <1>
+  "description": "Testing Workspace", <2>
+} 
+----
+<1> the `name` of the workspace field must match the name of the package directory
+<2> a brief description
+

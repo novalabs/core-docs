@@ -1,0 +1,107 @@
+[[corepackage-reference]]
+Package
+-------
+
+[[corepackage-overview]]
+Overview
+~~~~~~~~
+A Core package is a bundle of reusable code and meta-data.
+
+A package can include:
+
+* message definitions
+* node definitions
+* node source code
+* node configuration definitions
+* ... other code
+
+Packages are processed by the link:../tools/index.html#coretools-corepackage[CorePackage.py] and link:../tools/index.html#coretools-coreworkspace[CoreWorkspace.py] command line tool.
+
+From a Core user point of view a package is nothing but a directory that meets the following requirements:
+
+. it contains a file named `CORE_PACKAGE.json`
+. it contains a license file `LICENSE` 
+. it have a well defined structure
+
+[[corepackage-json]]
+CORE_PACKAGE.json
+~~~~~~~~~~~~~~~~~
+The `CORE_PACKAGE.json` file describes the package, and it is used by the Core build system either to manage the dependencies or to generate the makefiles.
+
+The file must be valid according to an Apache Avro footnoteref:[AVRO] schema.
+
+.Example: `CORE_PACKAGE.json` file for `led` package
+[source,json,numbered]
+----
+{
+  "name": "led", <1>
+  "description": "LED Nodes", <2>
+  "namespace": "@", <3>
+  "sources": [ <4>
+    "PublisherNode.cpp",
+    "SubscriberNode.cpp"
+   ]
+}
+----
+<1> the `name` of the message field must match the name of the package directory
+<2> a brief description
+<3> by default ('@') the namespace will be the name of the package; `namespace` can be used to override it
+<4> list of source files that will be compiled and linked with the target
+
+[[corepackage-structure]]
+Package directory structure
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+There are two kinds of packages, depending on their content: messages or non-messages.
+
+It is surely possible to have messages in a non-messages package, but this is strongly discouraged.
+
+Messages packages
+^^^^^^^^^^^^^^^^^
+Message packages must contain nothing but message definition files.
+
+These files must be inside a directory called `messages`.
+
+NOTE: It is customary that message packages name ends with `_msgs`.
+
+.`led_msgs` Package
+[plantuml,led_msgs-package-tree,"{plantuml_format}"]
+----
+salt
+{{T
++ led_msgs
+++ CORE_PACKAGE.json
+++ LICENSE
+++ messages
++++ Led.json
+}}
+----
+
+Non-Messages packages
+^^^^^^^^^^^^^^^^^^^^^
+Non-Messages package must not contain any message definition files.
+
+Source code must be put inside the `include` and `src` directories. +
+Nodes definitions must reside in `nodes` directory, while node configuration definitions must be in `configurations`.
+
+.`led` Package
+[plantuml,led-package-tree,"{plantuml_format}"]
+----
+salt
+{{T
++ led
+++ CORE_PACKAGE.json
+++ LICENSE
+++ include
++++ PublisherNode.hpp
++++ SubscriberNode.hpp
+++ src
++++ PublisherNode.cpp
++++ SubscriberNode.cpp
+++ nodes
++++ PublisherNode.json
++++ SubscriberNode.json
+++ configurations
++++ PublisherNodeConfiguration.json
++++ SubscriberNodeConfiguration.json
+}}
+----

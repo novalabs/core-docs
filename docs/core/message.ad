@@ -1,0 +1,73 @@
+[[coremessage-reference]]
+Message
+-------
+
+[[coremessage-overview]]
+Overview
+~~~~~~~~
+Messages represent the data type exchanged between publishers and subscribers.
+
+From a Core user perspective messages are defined using a JSON file. +
+The file must be valid according to an Apache Avro footnoteref:[AVRO] schema.
+
+[[coremessage-json]]
+JSON definition file
+~~~~~~~~~~~~~~~~~~~~
+.Example: `Led.json` message definition file
+[source,json,numbered]
+----
+{
+  "name": "Led", <1>
+  "description": "Status LED", <2>
+  "namespace": "@", <3>
+  "fields": [ <4>
+    {
+      "name": "led", <5>
+      "description": "Which led?", <6>
+      "type": "UINT32", <7>
+      "size": 1 <8>
+    },
+    {
+      "name": "value",
+      "description": "Value of the led",
+      "type": "UINT8",
+      "size": 1
+    }
+  ]
+}
+----
+<1> the `name` of the message field must match the name of the JSON file; `name` must be at most 15 characters long
+<2> a brief description
+<3> by default ('@') the namespace will be the name of the package the message resides in; `namespace` can be used to override it
+<4> messges cannot have nested data structures
+<5> field `name` must be at most 15 characters long
+<6> a brief description
+<7> the supported field types are `CHAR`, `INT8`, `UINT8`, `INT16`, `UINT16`, `INT32`, `UINT32`, `INT64`, `UINT64`, `FLOAT32`, `FLOAT64`, `TIMESTAMP`
+<8> array type fields are specified using the `size` attribute, scalar types require to specify 1 as the `size` of the field
+
+[[coremessage-generated]]
+Generated file
+~~~~~~~~~~~~~~
+Messages are converted to source code using the command line tools.
+The code generator relies on the C preprocessor to keep the generated code clean and readable.
+
+.Example: Source code generated from `Led.json`
+[source,cpp,numbered]
+----
+#pragma once
+
+#include <Core/MW/CoreMessage.hpp>
+
+namespace common_msgs {
+
+CORE_MESSAGE_BEGIN(Led) // Status LED
+	CORE_MESSAGE_FIELD(led, UINT32, 1) // Which led?
+	CORE_MESSAGE_FIELD(value, UINT8, 1) // Value of the led
+CORE_MESSAGE_END
+
+}
+----
+
+Array type fields will be implemented using `Core::MW::Array` class template (that is a stripped down std::array).
+
+From the source code point of view, messages are classes that inherit from `Core::MW::Message` class.

@@ -1,0 +1,60 @@
+= Core Reference
+Davide Rizzi <d.rizzi@novalabs.io>
+v1.0, 2016-04-13
+
+[[corereference-overview]]
+Overview
+--------
+
+[quote, Lt. Cmdr. Data]
+____
+My programming may be inadequate to the task.
+____
+
+[quote, Counselor Deanna Troy, 'Star Trek - The Next Generation: In Theory']
+____
+We're all more than the sum of our parts, Data. + 
+You'll have to be more than the sum of your programming. 
+____
+
+
+This document describes the JSON files used by the Core system to define all its main actors:
+
+* messages
+* nodes
+* configurations
+* packages
+* modules
+* build targets
+
+References
+~~~~~~~~~~
+Each JSON file has it's own Apache AVRO footnoteref:[AVRO, Apache AVRO https://avro.apache.org/] schema.
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::package.ad[tabsize=2]
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::message.ad[tabsize=2]
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::node.ad[tabsize=2]
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::configuration.ad[tabsize=2]
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::module.ad[tabsize=2]
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::workspace.ad[tabsize=2]
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::moduletarget.ad[tabsize=2]

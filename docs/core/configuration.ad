@@ -1,0 +1,75 @@
+[[coreconfiguration-reference]]
+Configuration
+-------------
+
+[[coreconfiguration-overview]]
+Overview
+~~~~~~~~
+From a Core user perspective node configurations are defined using a JSON file. +
+The file must be valid according to an Apache Avro footnoteref:[AVRO] schema.
+
+[[coreconfiguration-json]]
+JSON definition file
+~~~~~~~~~~~~~~~~~~~~
+.Example: `LedPublisherConfiguration.json` message definition file
+[source,json,numbered]
+----
+{
+  "name": "LedPublisherConfiguration", <1>
+  "description": "LED Publisher node configuration", <2>
+  "namespace": "@", <3>
+  "fields": [ <4>
+    {
+      "name": "topic", <5>
+      "description": "Name of the topic to publish to", <6>
+      "type": "CHAR", <7>
+      "size": 16 <8>
+    },
+    {
+      "name": "led",
+      "description": "Which led",
+      "type": "UINT32",
+      "size": 1
+    }
+  ]
+}
+----
+<1> the `name` of the message field must match the name of the JSON file; `name` must be at most 15 characters long
+<2> a brief description
+<3> by default ('@') the namespace will be the name of the package the configuration resides in; `namespace` can be used to override it
+<4> configurations cannot have nested data structures
+<5> field `name` must be at most 15 characters long
+<6> a brief description
+<7> the supported field types are `CHAR`, `INT8`, `UINT8`, `INT16`, `UINT16`, `INT32`, `UINT32`, `INT64`, `UINT64`, `FLOAT32`, `FLOAT64`, `TIMESTAMP`
+<8> array type fields are specified using the `size` attribute, scalar types require to specify 1 as the `size` of the field
+
+[[coreconfiguration-generated]]
+Generated file
+~~~~~~~~~~~~~~
+Configurations are converted to source code using the command line tools.
+The code generator relies on the C preprocessor to keep the generated code clean and readable.
+
+.Example: Source code generated from LedPublisherConfiguration.json
+[source,cpp,numbered]
+----
+#pragma once
+
+#include <Core/MW/CoreConfiguration.hpp>
+
+namespace led {
+
+CORE_CONFIGURATION_BEGIN(LedPublisherConfiguration) //LED Publisher node configuration
+	CORE_CONFIGURATION_FIELD(topic, CHAR, 16) // Name of the topic to publish to
+	CORE_CONFIGURATION_FIELD(led, UINT32, 1) // Which led
+CORE_CONFIGURATION_MAP_BEGIN(2)
+	CORE_CONFIGURATION_MAP_ENTRY(LedPublisherConfiguration, topic)
+	CORE_CONFIGURATION_MAP_ENTRY(LedPublisherConfiguration, led)
+CORE_CONFIGURATION_MAP_END()
+CORE_CONFIGURATION_END()
+
+}
+----
+
+Array type fields will be implemented using `Core::MW::Array` class template (that is a stripped down std::array).
+
+From the source code point of view, messages are classes that inherit from `Core::MW::CoreConfiguration` class.

@@ -1,0 +1,42 @@
+= Core Tools Reference
+Davide Rizzi <d.rizzi@novalabs.io>
+v1.0, 2016-04-13
+
+[[coretoolsreference-overview]]
+Overview
+--------
+This document describes fsdkl;fjsdjfhsdlkfhjsd
+
+* messages
+* nodes
+* configurations
+* packages
+* modules
+* build targets
+
+References
+~~~~~~~~~~
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::package.ad[tabsize=2]
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::message.ad[tabsize=2]
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::node.ad[tabsize=2]
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::configuration.ad[tabsize=2]
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::module.ad[tabsize=2]
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::moduletarget.ad[tabsize=2]
