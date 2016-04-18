@@ -7,6 +7,16 @@ v1.0, 2016-04-13
 [[middleware-reference]]
 Middleware reference
 --------------------
+[quote, Lt. Cmdr. Data]
+____
+My programming may be inadequate to the task.
+____
+
+[quote, Counselor Deanna Troy, 'Star Trek - The Next Generation: In Theory']
+____
+We're all more than the sum of our parts, Data. + 
+You'll have to be more than the sum of your programming. 
+____
 
 [[middleware-overview]]
 Overview
@@ -164,20 +174,21 @@ The latter approach, whilst apparently simpler, does not offer any control on th
 
 Nodes defined as subclasses of `Core::MW::CoreNode` share other important features:
 
-* they can be described using a JSON file, allowing automatic code generation of the main.cpp file by a tool
+* they can be described using a JSON file, allowing automatic code generation
 * they can be easily configured by means of a configuration system
+
 
 [[middleware-corenode]]
 CoreNode
 ^^^^^^^^
 
 [[middleware-corenode-icorenode]]
-ICoreNode & the node lifecycle
-++++++++++++++++++++++++++++++
+`ICoreNode` & the node lifecycle
+++++++++++++++++++++++++++++++++
 
 The `Core::MW::ICoreNode` interface describes the lifecycle of a node.
 
-.ICoreNode interface (header file)
+.Interface `ICoreNode`
 [source,cpp,numbered]
 ----
 class ICoreNode
@@ -302,7 +313,7 @@ The only way to recover must then be to tear down the node, calling `ICoreNode::
 
 See <<icorenode-state-machine-diagram>> for a description of the state transitions.
 
-.ICoreNode state machine
+.`ICoreNode` state machine
 [[icorenode-state-machine-diagram]]
 [plantuml, corenode-state-machine-diagram,"{plantuml_format}", alt="Class diagram"]
 ----
@@ -361,12 +372,44 @@ FINALIZING -up-> SET_UP: [onFinalize() == true]
 FINALIZING --> ERROR: [onFinalize() == false]
 ----
 
-NOTE: For clarity in <<icorenode-state-machine-diagram>> there is no reference to `Core::MW::ICoreNode::teardown()`, but it must always be possible to call it in every moment.+
+NOTE: For clarity in <<icorenode-state-machine-diagram>> there is no reference to `Core::MW::ICoreNode::teardown()`,
+but it must always be possible to call it in every moment. +
 The node must switch to a `ICoreNode::State::TEARING_DOWN` state and then, to `ICoreNode::State::NONE`.
 
 [[middleware-corenode]]
 CoreNode
 ++++++++
+.`CoreNode` header file
+[source,cpp,numbered]
+----
+#pragma once
+
+#include <Core/MW/namespace.hpp>
+
+#include <Core/MW/Thread.hpp>
+#include <Core/MW/Condition.hpp>
+#include <Core/MW/Mutex.hpp>
+#include <Core/MW/Node.hpp>
+
+#include <Core/MW/ICoreNode.hpp>
+
+NAMESPACE_CORE_MW_BEGIN
+
+class CoreNode:
+	public ICoreNode,
+	protected Core::MW::Node
+{
+public:
+	virtual ~CoreNode() {}
+
+	CoreNode(
+			const char*                    name,
+			Core::MW::Thread::PriorityEnum priority = Core::MW::Thread::PriorityEnum::NORMAL
+	);
+
+...	
+----
+
 The `Core::MW::CoreNode` class offers the developer the possibility to cleanly implement all the possible aspects related to a node by implementing the `Core::MW::ICoreNode` interface.
 
 Calling `CoreNode::setup()` will create the node execution thread.
@@ -377,12 +420,43 @@ The event member functions by default return `true`, so it is not needed to impl
 Implementing a new node requires to extend `Core::MW::CoreNode`, and to override the default event member functions as required. +
 `Core::MW::CoreNode` constructor takes 2 arguments, the node name and the node thread priority.
 
-A `Core::MW::CoreNode` object can be added to a `Core::MW::CoreNodeManager` (such as a `Core::MW::CoreModule`).
+`Core::MW::CoreNode` extends a lower-level `Core::MW::Node` class. +
+This class offers methods to notify the system that topic are going to be published and/or subscribed.
 
+.`advertise` and `publish` methods
+[source,cpp,numbered]
+----
+	template <typename MT>
+	bool
+	advertise(
+			Publisher<MT>& pub,
+			const char*    namep,
+			const Time&    publish_timeout = Time::INFINITE
+	);
+
+
+	template <typename MT>
+	bool
+	subscribe(
+			SubscriberExtBuf<MT>& sub,
+			const char*           namep,
+			MT                    mgpool_buf[]
+	);
+
+
+	template <typename MT, unsigned QL>
+	bool
+	subscribe(
+			Subscriber<MT, QL>& sub,
+			const char* namep
+	);
+----
+
+A `Core::MW::CoreNode` object can be added to a `Core::MW::CoreNodeManager` (such as a `Core::MW::CoreModule`). +
 In this way all the nodes lifecycles are syncronized.
-It is also easier and more concise than calling all the execute() while checking for the return value and states.
+It is also easier and more concise than calling all the `execute()` while checking for the return value and states.
 
-.CoreNode derived node (header file)
+.Example: `CoreNode` derived node (header file)
 [source,cpp,numbered]
 ----
 #pragma once
@@ -473,84 +547,30 @@ Core::MW::Thread::create_heap(NULL, THD_WORKING_AREA_SIZE(1024), NORMALPRIO, tes
 
 Configurations
 ++++++++++++++
-From a Core user perspective node configurations are defined using a JSON file. The file must be valid according
-to an Apache Avro footnoteref:[AVRO] schema.
-
-.Example: LedPublisherConfiguration.json
-[source,json,numbered]
-----
-{
-  "name": "LedPublisherConfiguration", <1>
-  "description": "LED Publisher node configuration", <2>
-  "namespace": "@", <3>
-  "fields": [ <4>
-    {
-      "name": "topic", <5>
-      "description": "Name of the topic to publish to", <6>
-      "type": "CHAR", <7>
-      "size": 16 <8>
-    },
-    {
-      "name": "led",
-      "description": "Which led",
-      "type": "UINT32",
-      "size": 1
-    }
-  ]
-}
-----
-<1> the `name` of the message field must match the name of the JSON file; `name` must be at most 15 characters long
-<2> a brief description
-<3> by default ('@') the namespace will be the name of the package the configuration resides in; `namespace` can be used to override it
-<4> configurations cannot have nested data structures
-<5> field `name` must be at most 15 characters long
-<6> a brief description
-<7> the supported field types are `CHAR`, `INT8`, `UINT8`, `INT16`, `UINT16`, `INT32`, `UINT32`, `INT64`, `UINT64`, `FLOAT32`, `FLOAT64`, `TIMESTAMP`
-<8> array type fields are specified using the `size` attribute, scalar types require to specify 1 as the `size` of the field
-
-Configurations are converted to source code using the command line tools. The code generator relies on the C preprocessor to keep the generated code clean and readable.
-
-.Example: Source code generated from LedPublisherConfiguration.json
-[source,cpp,numbered]
-----
-#pragma once
-
-#include <Core/MW/CoreConfiguration.hpp>
-
-namespace led {
-
-CORE_CONFIGURATION_BEGIN(LedPublisherConfiguration) //LED Publisher node configuration
-	CORE_CONFIGURATION_FIELD(topic, CHAR, 16) // Name of the topic to publish to
-	CORE_CONFIGURATION_FIELD(led, UINT32, 1) // Which led
-CORE_CONFIGURATION_MAP_BEGIN(2)
-	CORE_CONFIGURATION_MAP_ENTRY(LedPublisherConfiguration, topic)
-	CORE_CONFIGURATION_MAP_ENTRY(LedPublisherConfiguration, led)
-CORE_CONFIGURATION_MAP_END()
-CORE_CONFIGURATION_END()
-
-}
-----
-
-NOTE: Array type fields will be implemented using `Core::MW::Array` class template (that is a stripped down std::array).
-
 `Core::MW::CoreConfiguration` class implements a kind-of reflection system, which allows to access derived class members by their name:
 
-.Using `Core::MW::CoreConfiguration`
 [source,cpp,numbered]
 ----
 led::LedPublisherConfiguration configuration;
 
 configuration.led = 3;
+----
 
-// IS THE SAME AS
+is the same as
+
+[source,cpp,numbered]
+----
+led::LedPublisherConfiguration configuration;
 
 configuration["led"] = 3;
 ----
 
 This is useful for a runtime configuration of the node.
 
-WARNING: As this system relies on type deduction for template argument and return value types, special care must be used in assignments using the `[]` operator.
+[WARNING]
+====
+As this system relies on type deduction for template argument and return value types, special care must be used in assignments using the `[]` operator.
 This is specially true in assignments of numeric literals.
-It is better to always force the type by using an explicit cast.
 
-TIP: define user-defined literals such as _s16, _u8
+It is better to always force the type by using an explicit cast.
+====
