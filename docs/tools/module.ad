@@ -1,0 +1,73 @@
+[[coretools-coremodule]]
+CoreModule
+----------
+`CoreModule.py` is a command line tools that permits to:
+
+. list the content of a module
+. generate the code of a module
+
+TIP: It is possible to use kbd:[TAB] to invoke sub-command and/or module name completion.
+
+Synopsis
+~~~~~~~~
+ls::
+`CoreModule [options] ls` + 
+`CoreModule [options] ls <module-name>` +
+`CoreModule [options] ls <path-to-module>`
+
+generate::
+`CoreModule [options] generate <path-to-destination>` + 
+`CoreModule [options] generate <module-name> <path-to-destination>` +
+`CoreModule [options] generate <path-to-module> <path-to-destination>`
+
+init::
+`CoreModule [options] init <path-to-destination>`
+
+Options
+~~~~~~~
+--verbose::
+Verbose output
+
+--no-workspace::
+Do not look for module in workspace
+
+Subcommands
+~~~~~~~~~~~
+
+ls
+^^
+The `ls` command lists the content of a module.
+
+It can be used:
+
+* inside a module directory without any path or module name (e.g.: [listing.console]`$ CoreModule.py ls`)
+* specifying the path to a module directory (e.g.: [listing.console]`$ CoreModule.py ls <path-to-module>`)
+
+For system modules it is also possible to specify the name of the module (e.g.: [listing.console]`$ CoreModule.py ls led`). +
+For this last feature to work a `NOVA_CORE_ROOT` environment variable must be set with the path to the Core distribution.
+
+.Command `CoreModule ls`
+=================
+[listing.console]`$ CoreModule.py ls led` +
+[listing.console]`$ CoreModule.py ls` inside `led` module directory +
+[listing.console]`$ CoreModule.py ls <path-to-led-module>`
+
+produces:
+
+[listing.console]
+----
+╒══════════════════════════════════════════════════════════════════════════════╕
+│ PACKAGE                                                                      │
+╘══════════════════════════════════════════════════════════════════════════════╛
+
+TODO
+----
+=================
+
+generate
+^^^^^^^^
+The `generate` command generates the module code.
+
+init
+^^^^
+NOTE: to be implemented

@@ -1,12 +1,38 @@
 [[coretools-corepackage]]
-The CorePackage.py command
---------------------------
+CorePackage
+-----------
 `CorePackage.py` is a command line tools that permits to:
 
 . list the content of a package
 . generate the code of a package
 
 TIP: It is possible to use kbd:[TAB] to invoke sub-command and/or package name completion.
+
+Synopsis
+~~~~~~~~
+ls::
+`CorePackage [options] ls` + 
+`CorePackage [options] ls <package-name>` +
+`CorePackage [options] ls <path-to-package>`
+
+generate::
+`CorePackage [options] generate <path-to-destination>` + 
+`CorePackage [options] generate <package-name> <path-to-destination>` +
+`CorePackage [options] generate <path-to-package> <path-to-destination>`
+
+init::
+`CorePackage [options] init <path-to-destination>`
+
+Options
+~~~~~~~
+--verbose::
+Verbose output
+
+--no-workspace::
+Do not look for package in workspace
+
+Subcommands
+~~~~~~~~~~~
 
 ls
 ^^
@@ -20,9 +46,11 @@ It can be used:
 For system packages it is also possible to specify the name of the package (e.g.: [listing.console]`$ CorePackage.py ls led`). +
 For this last feature to work a `NOVA_CORE_ROOT` environment variable must be set with the path to the Core distribution.
 
-.Example
-================
-[listing.console]`$ CorePackage.py ls`
+.Command `CorePackage ls`
+=================
+[listing.console]`$ CorePackage.py ls led` +
+[listing.console]`$ CorePackage.py ls` inside `led` package directory +
+[listing.console]`$ CorePackage.py ls <path-to-led-package>`
 
 produces:
 
@@ -48,4 +76,12 @@ Name: SubscriberConfiguration
 Description: LED Subscriber node configuration
 Source: configurations/SubscriberConfiguration.json
 ----
-================
+=================
+
+generate
+^^^^^^^^
+The `generate` command generates the package code.
+
+init
+^^^^
+NOTE: to be implemented

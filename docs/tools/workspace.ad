@@ -1,0 +1,74 @@
+[[coretools-coreworkspace]]
+CoreWorkspace
+-------------
+`CoreWorkspace.py` is a command line tools that permits to:
+
+. list the content of a workspace
+. generate the code of a workspace
+
+TIP: It is possible to use kbd:[TAB] to invoke sub-command and/or workspace name completion.
+
+Synopsis
+~~~~~~~~
+ls::
+`CoreWorkspace [options] ls` + 
+`CoreWorkspace [options] ls <workspace-name>` +
+`CoreWorkspace [options] ls <path-to-workspace>`
+
+generate::
+`CoreWorkspace [options] generate <path-to-destination>` + 
+`CoreWorkspace [options] generate <workspace-name> <path-to-destination>` +
+`CoreWorkspace [options] generate <path-to-workspace> <path-to-destination>`
+
+init::
+`CoreWorkspace [options] init <path-to-destination>`
+
+Options
+~~~~~~~
+--verbose::
+Verbose output
+
+Subcommands
+~~~~~~~~~~~
+
+ls
+^^
+The `ls` command lists the content of a workspace.
+
+It can be used:
+
+* inside a workspace directory without any path or workspace name (e.g.: [listing.console]`$ CoreWorkspace.py ls`)
+* specifying the path to a workspace directory (e.g.: [listing.console]`$ CoreWorkspace.py ls <path-to-workspace>`)
+
+For system workspaces it is also possible to specify the name of the workspace (e.g.: [listing.console]`$ CoreWorkspace.py ls led`). +
+For this last feature to work a `NOVA_CORE_ROOT` environment variable must be set with the path to the Core distribution.
+
+.Command `CoreWorkspace ls`
+=================
+[listing.console]`$ CoreWorkspace.py ls led` +
+[listing.console]`$ CoreWorkspace.py ls` inside `led` workspace directory +
+[listing.console]`$ CoreWorkspace.py ls <path-to-led-workspace>`
+
+produces:
+
+[listing.console]
+----
+╒══════════════════════════════════════════════════════════════════════════════╕
+│ PACKAGE                                                                      │
+╘══════════════════════════════════════════════════════════════════════════════╛
+TODO
+----
+=================
+
+generate
+^^^^^^^^
+The `generate` command:
+
+. generates the package code
+. generates the module code
+. generates the CMake files for the targets
+. generates, using CMake, the Makefiles and Eclipse projects for the targets
+
+init
+^^^^
+The `init` command initializes an empty workspace: it creates both a `WORKSPACE.json` file and a conforming directory structure.

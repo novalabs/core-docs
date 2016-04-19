@@ -1,0 +1,46 @@
+[[coretools-core]]
+Core
+----
+`Core.py` is a command line tools that permits to:
+
+. list the content of a Core distribution
+
+Synopsis
+~~~~~~~~
+ls::
+`Core [options] ls` + 
+`Core [options] ls <path-to-core>`
+
+Options
+~~~~~~~
+--verbose::
+Verbose output
+
+Subcommands
+~~~~~~~~~~~
+
+ls
+^^
+The `ls` command lists the content of a Core distribution.
+
+It can be used:
+
+* inside a  directory without any path or  name (e.g.: [listing.console]`$ Core.py ls`)
+* specifying the path to a  directory (e.g.: [listing.console]`$ Core.py ls <path-to->`)
+
+.Command `Core ls`
+=================
+[listing.console]`$ Core.py ls` inside `led`  directory +
+[listing.console]`$ Core.py ls <path-to-led->`
+
+produces:
+
+[listing.console]
+----
+╒══════════════════════════════════════════════════════════════════════════════╕
+│ PACKAGE                                                                      │
+╘══════════════════════════════════════════════════════════════════════════════╛
+
+TODO
+----
+=================
