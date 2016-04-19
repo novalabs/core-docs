@@ -7,16 +7,6 @@ v1.0, 2016-04-13
 [[middleware-reference]]
 Middleware reference
 --------------------
-[quote, Lt. Cmdr. Data]
-____
-My programming may be inadequate to the task.
-____
-
-[quote, Counselor Deanna Troy, 'Star Trek - The Next Generation: In Theory']
-____
-We're all more than the sum of our parts, Data. + 
-You'll have to be more than the sum of your programming. 
-____
 
 [[middleware-overview]]
 Overview
@@ -273,7 +263,7 @@ protected:
 };
 ----
 
-When are firstly created, `Core::MW::ICoreNode` must be in a `ICoreNode::State::NONE` state.
+When are firstly created, an `Core::MW::ICoreNode` derived object must be in a `ICoreNode::State::NONE` state.
 Calling `ICoreNode::setup()` will set up the node execution. State will change to `ICoreNode::State::SET_UP` once the node is ready.
 
 Then is it possible to cycle all the states using `ICoreNode::execute()`. +
@@ -309,13 +299,13 @@ subscribing, callback settings, ...
 
 Whenever an unrecoverable error occurs (i.e.: when an event member function returns `false`), the state of the node must become `ICoreNode::State::ERROR` and `ICoreNode::onError()` event must be called.
 The only way to recover must then be to tear down the node, calling `ICoreNode::teardown()`. +
-`ICoreNode::teardown()` must also be called when a CoreNode object is destroyed.
+`ICoreNode::teardown()` must also be called when a `ICoreNode `object is destroyed.
 
 See <<icorenode-state-machine-diagram>> for a description of the state transitions.
 
 .`ICoreNode` state machine
 [[icorenode-state-machine-diagram]]
-[plantuml, corenode-state-machine-diagram,"{plantuml_format}", alt="Class diagram"]
+[plantuml, corenode-state-machine-diagram,"{plantuml_format}", alt="ICoreNode state machine"]
 ----
 [*] -> NONE
 
