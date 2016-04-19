@@ -1,6 +1,5 @@
 [[coretools-coreworkspace]]
-CoreWorkspace
--------------
+== CoreWorkspace
 `CoreWorkspace.py` is a command line tools that permits to:
 
 . list the content of a workspace
@@ -8,8 +7,7 @@ CoreWorkspace
 
 TIP: It is possible to use kbd:[TAB] to invoke sub-command and/or workspace name completion.
 
-Synopsis
-~~~~~~~~
+=== Synopsis
 ls::
 `CoreWorkspace [options] ls` + 
 `CoreWorkspace [options] ls <workspace-name>` +
@@ -23,16 +21,12 @@ generate::
 init::
 `CoreWorkspace [options] init <path-to-destination>`
 
-Options
-~~~~~~~
+=== Options
 --verbose::
 Verbose output
 
-Subcommands
-~~~~~~~~~~~
-
-ls
-^^
+=== Subcommands
+==== ls
 The `ls` command lists the content of a workspace.
 
 It can be used:
@@ -60,8 +54,7 @@ TODO
 ----
 =================
 
-generate
-^^^^^^^^
+==== generate
 The `generate` command:
 
 . generates the package code
@@ -69,6 +62,5 @@ The `generate` command:
 . generates the CMake files for the targets
 . generates, using CMake, the Makefiles and Eclipse projects for the targets
 
-init
-^^^^
+==== init
 The `init` command initializes an empty workspace: it creates both a `WORKSPACE.json` file and a conforming directory structure.

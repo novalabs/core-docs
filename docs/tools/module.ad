@@ -1,6 +1,5 @@
 [[coretools-coremodule]]
-CoreModule
-----------
+== CoreModule
 `CoreModule.py` is a command line tools that permits to:
 
 . list the content of a module
@@ -8,8 +7,7 @@ CoreModule
 
 TIP: It is possible to use kbd:[TAB] to invoke sub-command and/or module name completion.
 
-Synopsis
-~~~~~~~~
+=== Synopsis
 ls::
 `CoreModule [options] ls` + 
 `CoreModule [options] ls <module-name>` +
@@ -23,19 +21,15 @@ generate::
 init::
 `CoreModule [options] init <path-to-destination>`
 
-Options
-~~~~~~~
+=== Options
 --verbose::
 Verbose output
 
 --no-workspace::
 Do not look for module in workspace
 
-Subcommands
-~~~~~~~~~~~
-
-ls
-^^
+=== Subcommands
+==== ls
 The `ls` command lists the content of a module.
 
 It can be used:
@@ -64,10 +58,8 @@ TODO
 ----
 =================
 
-generate
-^^^^^^^^
+==== generate
 The `generate` command generates the module code.
 
-init
-^^^^
+==== init
 NOTE: to be implemented

@@ -3,8 +3,7 @@ Davide Rizzi <d.rizzi@novalabs.io>
 v1.0, 2016-04-13
 
 [[coretoolsreference-overview]]
-Overview
---------
+== Overview
 This document describes the command line tools that make it possible to manage the components of the Core system.
 
 Environment variables

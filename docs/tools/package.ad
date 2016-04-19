@@ -1,6 +1,5 @@
 [[coretools-corepackage]]
-CorePackage
------------
+== CorePackage
 `CorePackage.py` is a command line tools that permits to:
 
 . list the content of a package
@@ -8,8 +7,7 @@ CorePackage
 
 TIP: It is possible to use kbd:[TAB] to invoke sub-command and/or package name completion.
 
-Synopsis
-~~~~~~~~
+=== Synopsis
 ls::
 `CorePackage [options] ls` + 
 `CorePackage [options] ls <package-name>` +
@@ -23,19 +21,15 @@ generate::
 init::
 `CorePackage [options] init <path-to-destination>`
 
-Options
-~~~~~~~
+=== Options
 --verbose::
 Verbose output
 
 --no-workspace::
 Do not look for package in workspace
 
-Subcommands
-~~~~~~~~~~~
-
-ls
-^^
+=== Subcommands
+==== ls
 The `ls` command lists the content of a package.
 
 It can be used:
@@ -78,10 +72,8 @@ Source: configurations/SubscriberConfiguration.json
 ----
 =================
 
-generate
-^^^^^^^^
+==== generate
 The `generate` command generates the package code.
 
-init
-^^^^
+==== init
 NOTE: to be implemented

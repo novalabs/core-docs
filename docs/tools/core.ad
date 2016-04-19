@@ -1,26 +1,20 @@
 [[coretools-core]]
-Core
-----
+== Core
 `Core.py` is a command line tools that permits to:
 
 . list the content of a Core distribution
 
-Synopsis
-~~~~~~~~
+=== Synopsis
 ls::
 `Core [options] ls` + 
 `Core [options] ls <path-to-core>`
 
-Options
-~~~~~~~
+=== Options
 --verbose::
 Verbose output
 
-Subcommands
-~~~~~~~~~~~
-
-ls
-^^
+=== Subcommands
+==== ls
 The `ls` command lists the content of a Core distribution.
 
 It can be used:
