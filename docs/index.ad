@@ -2,8 +2,7 @@
 Davide Rizzi <d.rizzi@novalabs.io>
 v1.0, 2016-04-19
 
-Reference Manuals
------------------
+== Reference Manuals
 link:getting-started/index.html[Getting Started]
 
 link:core/index.html[Core]
@@ -12,6 +11,5 @@ link:mw/index.html[Core Middleware]
 
 link:tools/index.html[Core Tools]
 
-Tutorials
----------
+== Tutorials
 _Coming soon!_
