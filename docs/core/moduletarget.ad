@@ -1,10 +1,8 @@
 [[coremoduletarget-reference]]
-Module Target
--------------
+== Module Target
 
 [[coremoduletarget-overview]]
-Overview
-~~~~~~~~
+=== Overview
 Module Target represent the firmware that will be compiled and deployed to a module.
 
 Module Targets are processed by the link:../tools/index.html#coretools-coreworkspace[CoreWorkspace.py] command line tool.
@@ -15,8 +13,7 @@ From a Core user point of view a target is nothing but a directory that meets th
 . it have a well defined structure
 
 [[coremoduletarget-json]]
-MODULE_TARGET.json
-~~~~~~~~~~~~~~~~~~
+=== MODULE_TARGET.json
 .Example: `MODULE_TARGET.json` for an IMU target
 [source,json,numbered]
 ----
@@ -47,8 +44,7 @@ MODULE_TARGET.json
 <6> list of include directories for header files (relative to target directory)
 
 [[coremoduletarget-generated]]
-Generated file
-~~~~~~~~~~~~~~
+=== Generated file
 Module Target are converted to CMake footnoteref:[CMAKE, CMake https://cmake.org/] code using the command line tools.
 
 .Example: `CMakeLists.txt` generated from `MODULE_TARGET.json`

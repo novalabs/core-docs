@@ -1,10 +1,8 @@
 [[coreworkspace-reference]]
-Workspace
----------
+== Workspace
 
 [[coreworkspace-overview]]
-Overview
-~~~~~~~~
+=== Overview
 A workspace comprehends:
 
 * build targets
@@ -19,8 +17,7 @@ From a Core user point of view a workspace is nothing but a directory that meets
 . it have a well defined structure
 
 [[coreworkspace-json]]
-WORKSPACE.json
-~~~~~~~~~~~~~~
+=== WORKSPACE.json
 The `WORKSPACE.json` file describes the workspace.
 
 The file must be valid according to an Apache Avro footnoteref:[AVRO] schema.

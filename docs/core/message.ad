@@ -1,18 +1,14 @@
 [[coremessage-reference]]
-Message
--------
-
+== Message
 [[coremessage-overview]]
-Overview
-~~~~~~~~
+=== Overview
 Messages represent the data type exchanged between publishers and subscribers.
 
 From a Core user perspective messages are defined using a JSON file. +
 The file must be valid according to an Apache Avro footnoteref:[AVRO] schema.
 
 [[coremessage-json]]
-JSON definition file
-~~~~~~~~~~~~~~~~~~~~
+=== JSON definition file
 .Example: `Led.json` message definition file
 [source,json,numbered]
 ----
@@ -46,8 +42,7 @@ JSON definition file
 <8> array type fields are specified using the `size` attribute, scalar types require to specify 1 as the `size` of the field
 
 [[coremessage-generated]]
-Generated file
-~~~~~~~~~~~~~~
+=== Generated file
 Messages are converted to source code using the command line tools.
 The code generator relies on the C preprocessor to keep the generated code clean and readable.
 

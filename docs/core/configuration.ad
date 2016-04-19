@@ -1,16 +1,12 @@
 [[coreconfiguration-reference]]
-Configuration
--------------
-
+== Configuration
 [[coreconfiguration-overview]]
-Overview
-~~~~~~~~
+=== Overview
 From a Core user perspective node configurations are defined using a JSON file. +
 The file must be valid according to an Apache Avro footnoteref:[AVRO] schema.
 
 [[coreconfiguration-json]]
-JSON definition file
-~~~~~~~~~~~~~~~~~~~~
+=== JSON definition file
 .Example: `LedPublisherConfiguration.json` message definition file
 [source,json,numbered]
 ----
@@ -44,8 +40,7 @@ JSON definition file
 <8> array type fields are specified using the `size` attribute, scalar types require to specify 1 as the `size` of the field
 
 [[coreconfiguration-generated]]
-Generated file
-~~~~~~~~~~~~~~
+=== Generated file
 Configurations are converted to source code using the command line tools.
 The code generator relies on the C preprocessor to keep the generated code clean and readable.
 
