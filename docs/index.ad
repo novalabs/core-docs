@@ -1,8 +1,17 @@
-:toc: left
-:experimental:
-
-= Nova Core
+= Nova Core Documentation
 Davide Rizzi <d.rizzi@novalabs.io>
-v1.0, 2016-04-13
+v1.0, 2016-04-19
 
-include:packages.ad[]
+Reference Manuals
+-----------------
+link:getting-started/index.html[Getting Started]
+
+link:core/index.html[Core]
+
+link:mw/index.html[Core Middleware]
+
+link:tools/index.html[Core Tools]
+
+Tutorials
+---------
+_Coming soon!_
