@@ -20,7 +20,7 @@ Nodes defined as subclasses of `Core::MW::CoreNode` share other important featur
 [[middleware-corenode]]
 === CoreNode
 [[middleware-corenode-icorenode]]
-==== ICoreNode & the node lifecycle
+==== ICoreNode and the node lifecycle
 The `Core::MW::ICoreNode` interface describes the lifecycle of a node.
 
 .Interface `ICoreNode`
@@ -29,7 +29,7 @@ The `Core::MW::ICoreNode` interface describes the lifecycle of a node.
 class ICoreNode
 {
 public:
-	enum class State {
+	enum class State { <1>
 		NONE, // Node has not been set up
 		SET_UP, // wait
 		INITIALIZING, // -> onInitialize
@@ -49,28 +49,33 @@ public:
 		TEARING_DOWN // killing
 	};
 
-	enum class Action {
-		INITIALIZE, CONFIGURE, PREPARE_HW, PREPARE_MW, START, STOP, FINALIZE
+	enum class Action { <2>
+		INITIALIZE,
+		CONFIGURE,
+		PREPARE_HW,
+		PREPARE_MW,
+		START,
+		STOP,
+		FINALIZE
 	};
 
-	virtual bool
+	virtual bool <3>
 	setup() = 0;
 
-	virtual bool
-	teardown() = 0;
-
-	virtual bool
+	virtual bool <4>
 	execute(
-			Action what
+		Action what
 	) = 0;
+
+	virtual bool <5>
+	teardown() = 0;
 
 	virtual State
 	state() = 0;
 
-
 	virtual ~ICoreNode() {}
 
-protected:
+protected: <6>
 	virtual bool
 	onInitialize() = 0;
 
@@ -107,9 +112,17 @@ protected:
 	State _currentState;
 };
 ----
+<1> node states
+<2> actions on the node
+<3> setup the node
+<4> change state
+<5> teardown the node
+<6> event handlers
 
 When are firstly created, an `Core::MW::ICoreNode` derived object must be in a `ICoreNode::State::NONE` state.
-Calling `ICoreNode::setup()` will set up the node execution. State will change to `ICoreNode::State::SET_UP` once the node is ready.
+
+Calling `ICoreNode::setup()` will set up the node execution.
+State will change to `ICoreNode::State::SET_UP` once the node is ready.
 
 Then is it possible to cycle all the states using `ICoreNode::execute()`. +
 The order of the actions to execute must be exactly:
@@ -124,29 +137,34 @@ The order of the actions to execute must be exactly:
 
 `ICoreNode::execute()` must return `false` if an out of order action is requested.
 
-To every action corresponds an event: `ICoreNode::onInitialize()`,
-`ICoreNode::onConfigure()`, `ICoreNode::onPrepareHW()`,
-`ICoreNode::onPrepareMW()`, `ICoreNode::onStart()`,
-`ICoreNode::onLoop()`, `ICoreNode::onStop()`, `ICoreNode::onFinalize()`.
+To every action corresponds an event:
+[[coretoolsreference-envvars]]
+[cols="1,1,8", options="header"]
+.Environment variables
+|===
+| Action       | Event handler    | Meaning
+| `INITIALIZE` | `onInitialize()` | memory allocation, default memeber value assignement, ...
+| `CONFIGURE`  | `onConfigure()`  | configuration, ...
+| `PREPARE_HW` | `onPrepareHW()`  | hardware setup, device probing, ...
+| `PREPARE_MW` | `onPrepareMW()`  | publishers advertising and subscribers subscribing, callback settings, ...
+| `START`      | `onStart()`      | hardware starting, ...
+| `STOP`       | `onStop()`       | hardware stopping, ...
+| `FINALIZE`   | `onFinalize()`   | memory deallocation, ...
+|===
 
-The meaning of the events can be summarized as follows:
+Two more events are defined: `ICoreNode::onLoop()` and `ICoreNode::onError()`.
 
-* `ICoreNode::onInitialize()`: memory allocation, default memeber value
-assignement, ...
-* `ICoreNode::onConfigure()`: configuration, ...
-* `ICoreNode::onPrepareHW()`: hardware setup, device probing, ...
-* `ICoreNode::onPrepareMW()`: publishers advertising and subscribers
-subscribing, callback settings, ...
-* `ICoreNode::onStart()`: hardware starting, ...
-* `ICoreNode::onLoop()`: the main loop
-* `ICoreNode::onStop()`: hardware stopping, ...
-* `ICoreNode::onFinalize()`: memory deallocation, ...
+`ICoreNode::onLoop()` is the main node loop.
 
-Whenever an unrecoverable error occurs (i.e.: when an event member function returns `false`), the state of the node must become `ICoreNode::State::ERROR` and `ICoreNode::onError()` event must be called.
+Whenever an unrecoverable error occurs (i.e.: when an event member function returns `false`), the state of the node 
+must become `ICoreNode::State::ERROR` and `ICoreNode::onError()` event must be called.
+
 The only way to recover must then be to tear down the node, calling `ICoreNode::teardown()`. +
+The node must switch to a `ICoreNode::State::TEARING_DOWN` state and then, to `ICoreNode::State::NONE`.
 `ICoreNode::teardown()` must also be called when a `ICoreNode `object is destroyed.
 
 See <<icorenode-state-machine-diagram>> for a description of the state transitions.
+There is no reference to `Core::MW::ICoreNode::teardown()`, but it must always be possible to call it in every moment.
 
 .`ICoreNode` state machine
 [[icorenode-state-machine-diagram]]
@@ -207,10 +225,6 @@ FINALIZING -up-> SET_UP: [onFinalize() == true]
 FINALIZING --> ERROR: [onFinalize() == false]
 ----
 
-NOTE: For clarity in <<icorenode-state-machine-diagram>> there is no reference to `Core::MW::ICoreNode::teardown()`,
-but it must always be possible to call it in every moment. +
-The node must switch to a `ICoreNode::State::TEARING_DOWN` state and then, to `ICoreNode::State::NONE`.
-
 [[middleware-corenode]]
 ==== CoreNode
 .`CoreNode` header file
@@ -249,15 +263,15 @@ The `Core::MW::CoreNode` class offers the developer the possibility to cleanly i
 Calling `CoreNode::setup()` will create the node execution thread.
 State will change to `CoreNode::State::SET_UP` once the thread has been created.
 
-The event member functions by default return `true`, so it is not needed to implement these in `Core::MW::CoreNode` derived classes.
-
 Implementing a new node requires to extend `Core::MW::CoreNode`, and to override the default event member functions as required. +
 `Core::MW::CoreNode` constructor takes 2 arguments, the node name and the node thread priority.
+
+TIP: The event member functions by default return `true`, so it is not needed to implement these in `Core::MW::CoreNode` derived classes.
 
 `Core::MW::CoreNode` extends a lower-level `Core::MW::Node` class. +
 This class offers methods to notify the system that topic are going to be published and/or subscribed.
 
-.`advertise` and `publish` methods
+.`Core::MW::Node` advertise and publish methods
 [source,cpp,numbered]
 ----
 	template <typename MT>
@@ -341,6 +355,18 @@ private: // EVENTS
 === OS thread
 In this approach a node is defined directly as a thread.
 
+The main node loop must call node `Node::spin()` member function, that dispatches the messages around.
+
+.`Core::MW::Node` spin method
+[source,cpp,numbered]
+----
+bool
+	spin(
+			const Time& timeout = Time::INFINITE
+	);
+----
+
+`Node::spin()` returns false if no messages where received after `timeout`.
 
 .A node defined as an OS thread
 =================
@@ -352,17 +378,14 @@ test_subscriber_node(
 		void* arg
 )
 {
-	Core::MW::Node node("test_sub");
-	Core::MW::Subscriber<common_msgs::String64, 5> sub;
 	common_msgs::String64* msgp;
-
-	(void)arg;
-	chRegSetThreadName("test_sub");
-
-	node.subscribe(sub, "test");
+	
+	Core::MW::Node node("test_sub"); <1>
+	Core::MW::Subscriber<common_msgs::String64, 5> sub; <2>
+	node.subscribe(sub, "test"); <3>
 
 	for (;;) {
-		node.spin(Core::MW::Time::ms(1000));
+		node.spin(Core::MW::Time::ms(1000)); <4>
 
 		if (sub.fetch(msgp)) {
 			module.stream.printf("%s\r\n", msgp->data);
@@ -371,6 +394,10 @@ test_subscriber_node(
 	}
 }
 ----
+<1> create the node
+<2> create a Subscriber
+<3> subscribe `sub` to topic `test`
+<4> spin
 
 And later on, create a thread with it.
 

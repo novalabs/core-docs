@@ -7,26 +7,28 @@ A publisher is defined as an instance of `Core::MW::Publisher<typename MessageTy
 The class template must be specialized using the message type of the topic it will publish to.
 
 .How to publish data
+=================
 [source,cpp,numbered]
 ----
 common_msgs::Led* msg;
 
-Core::MW::Publisher<common_msgs::Led> publisher;
+Core::MW::Publisher<common_msgs::Led> publisher; <1>
 
-if (publisher.alloc(msg)) { // <1>
+if (publisher.alloc(msg)) { // <2>
 
-	msgp->led   = 4;    // <2>
+	msgp->led   = 4;    // <3>
 	msgp->value = 0;
 
-	if (!publisher.publish(*msg)) { // <3>
+	if (!publisher.publish(*msg)) { // <4>
 		...
 	}
 }
 ----		
-<1> ask the publisher to allocate a message
-<2> valorize the message
-<3> publish it
-
+<1> specialize with the message
+<2> ask the publisher to allocate a message
+<3> valorize the message
+<4> publish it
+=================
 
 The `Core::MW::Publisher::alloc()` method will return false where there are no subscribers to the topic. +
 The `Core::MW::Publisher::publish()` method will return false when TODO.
@@ -49,12 +51,9 @@ NOTE: It is up to the node to tell the system that the subscriber exists. This w
 
 [[middleware-subscriber-callback]]
 ==== Callback
-It is possible to register a subscriber callback the Middleware will
-call on its spin() method (more on this later).
+It is possible to register a subscriber callback the node will call on its spin() method (more on this later).
 
-The callback function signature for a
-`Core::MW::Subscriber<typename MessageType, unsigned QUEUE_LENGTH>`
-subscriber is:
+The callback function signature for a `Core::MW::Subscriber<typename MessageType, unsigned QUEUE_LENGTH>` subscriber is:
 
 .Callback data type
 [source,cpp,numbered]
@@ -67,17 +66,14 @@ typedef bool (* Callback)(
 
 The callback function can be registered using `Core::MW::Subscriber::set_callback()` method.
 
-The node parameter is required to easily allow multiple instance of the
-subscriber (as the callback is a C function-pointer).
+The node parameter is required to easily allow multiple instance of the subscriber (as the callback is a C function-pointer).
 
-.Callback function example
+.Callback function
+=================
 [source,cpp,numbered]
 ----
-
 ...
-
 subscriber.set_callback(LedSubscriber::callback); <1>
-
 ...
 
 bool
@@ -93,11 +89,14 @@ LedSubscriber::callback(
 ----
 <1> register the callback
 <2> pointer to instance of the node
+=================
 
 TIP: If the callback is a class member function, it _MUST_ be made `static` (to exclude the parameter `this` from its signature).
 
 [[middleware-subscriber-fetch]]
 ==== fetch()
+.fetch()
+=================
 [source,cpp,numbered]
 ----
 common_msgs::Led* msg;
@@ -106,6 +105,6 @@ if (subscriber.fetch(msg)) {
 	setLedValue(msg.value);
 }
 ----
+=================
 
 The `Core::MW::Subscriber::fetch()` method will return false where there are no messages in the queue.
-

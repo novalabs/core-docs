@@ -6,7 +6,7 @@
 ----
 led::LedPublisherConfiguration configuration;
 
-configuration.led = 3;
+configuration["led"] = 5;
 ----
 
 is the same as
@@ -15,15 +15,27 @@ is the same as
 ----
 led::LedPublisherConfiguration configuration;
 
-configuration["led"] = 3;
+configuration.led = 5;
 ----
 
 This is useful for a runtime configuration of the node.
+
+TIP: Even though it is possible to directly write the configuration code, it is better to use the facilities provided by link:../core/index.html#coreconfiguration-reference[Core Configuration].
 
 [WARNING]
 ====
 As this system relies on type deduction for template argument and return value types, special care must be used in assignments using the `[]` operator.
 This is specially true in assignments of numeric literals.
 
-It is better to always force the type by using an explicit cast.
+It is better to always force the type by using an explicit cast or the user defined literals `_s8`, `_u8`, `_s16`, `_u16`, `_s32`, `_u32`, `_s64`, `_u64`, `_f32`, `_f64`.
+
+[source,cpp,numbered]
+----
+led::LedPublisherConfiguration configuration;
+
+configuration["led"] = (uint32_t)5; <1>
+configuration["led"] = 5_u32; <2>
+----
+<1> explicit cast
+<2> user defined literal
 ====
