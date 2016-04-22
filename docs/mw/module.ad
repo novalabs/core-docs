@@ -1,0 +1,190 @@
+[[middleware-module]]
+== Module
+`Core::MW::CoreModule` abstracts a Core module. 
+
+Each module must inherit from this class.
+
+.`CoreModule` header file
+[source,cpp,numbered]
+----
+// Led::toggle and Led::write are to be implemented in derived Module.
+
+#pragma once
+
+#include <Core/MW/namespace.hpp>
+#include <Core/MW/common.hpp>
+#include <Core/MW/CoreNodeManager.hpp>
+
+NAMESPACE_CORE_MW_BEGIN
+
+class CoreModule:
+	public CoreNodeManager <1>
+{
+public:
+	class Led <2>
+	{
+	public:
+		void
+		toggle();
+
+		void
+		write(
+			unsigned on
+		);
+	};
+
+	static Led& led;
+
+
+	bool
+	initialize();
+
+	static const void
+	halt(
+		const char* message
+	);
+
+
+	CoreModule() {}
+
+	virtual ~CoreModule() {}
+};
+
+NAMESPACE_CORE_MW_END
+----
+<1> inherits from `Core::MW::CoreNodeManager`
+<2> led class
+
+Lines 15-25 define the class that control the status led.
+The implementation of the class is left to the derived module.
+
+
+.A module derived from `CoreNode`
+=================
+[source,cpp,numbered]
+----
+#pragma once
+
+#include <Configuration.hpp>
+#include <Core/MW/CoreModule.hpp>
+#include <Core/MW/CoreSensor.hpp>
+
+namespace sensors {}
+
+// Forward declarations
+namespace sensors {
+	class L3GD20H_Gyro;
+	class LSM303D_Acc;
+	class LSM303D_Mag;
+}
+
+class Module:
+	public Core::MW::CoreModule <1>
+{
+public:
+// --- DEVICES ----------------------------------------------------------------
+	static sensors::L3GD20H_Gyro& gyro;
+	static sensors::LSM303D_Acc&  acc;
+	static sensors::LSM303D_Mag&  mag;
+// ----------------------------------------------------------------------------
+
+
+	static bool
+	initialize(); <2>
+
+
+	Module();
+	virtual ~Module() {}
+};
+----
+<1> inherit from `CoreModule`
+<2> override `CoreModule::intialize()`
+=================
+
+.Using a module derived from `CoreNode`
+=================
+The following is the `main.cpp` from a target using the IMU module.
+
+[source,cpp,numbered]
+----
+#include <Configuration.hpp>
+#include <Module.hpp> <1>
+
+
+// --- MESSAGES ---------------------------------------------------------------
+#include <common_msgs/Led.hpp>
+
+
+// --- NODES ------------------------------------------------------------------
+#include <sensors/Publisher.hpp>
+#include <led/Subscriber.hpp>
+
+
+// --- BOARD IMPL -------------------------------------------------------------
+#include <sensors/L3GD20H.hpp> <2>
+#include <sensors/LSM303D.hpp>
+
+
+// *** DO NOT MOVE ***
+Module module; <3>
+
+
+// --- TYPES ------------------------------------------------------------------
+using Vector3_i16_Publisher = sensors::Publisher<common_msgs::Vector3_i16>;
+
+
+// --- NODES ------------------------------------------------------------------
+led::Subscriber led_subscriber("led_subscriber", Core::MW::Thread::PriorityEnum::LOWEST);
+
+Vector3_i16_Publisher gyro_publisher("gyro_publisher", module.gyro);
+Vector3_i16_Publisher acc_publisher("acc_publisher", module.acc);
+Vector3_i16_Publisher mag_publisher("mag_publisher", module.mag);
+
+
+// --- MAIN -------------------------------------------------------------------
+extern "C" {
+	int
+	main()
+	{
+		module.initialize(); <4>
+
+		// Nodes configuration
+		led_subscriber.configuration["topic"] = "led";
+
+		gyro_publisher.configuration["topic"] = "gyro";
+		acc_publisher.configuration["topic"]  = "acc";
+		mag_publisher.configuration["topic"]  = "mag";
+
+		// Add nodes to the module...
+		module.add(led_subscriber); <5>
+		module.add(gyro_publisher);
+		module.add(acc_publisher);
+		module.add(mag_publisher);
+
+		// ... and let's play!
+		module.setup(); <6>
+		module.run(); <7>
+
+		// Is everything going well?
+		for (;;) {
+			if (!module.isOk()) { <8>
+				module.halt("This must not happen!");
+			}
+
+			Core::MW::Thread::sleep(Core::MW::Time::ms(500));
+		}
+
+		return Core::MW::Thread::OK;
+	} // main
+}
+
+----
+<1> include the header file for the derived module
+<2> include the implementation of the forward declarations in `Module.hpp`
+<3> module instance
+<4> initialize the module
+<5> add nodes to the module
+<6> setup the nodes
+<7> run the nodes
+<8> check that everything is ok
+=================
