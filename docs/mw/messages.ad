@@ -1,0 +1,27 @@
+[[middleware-msgs]]
+== Messages
+A message is the datatype of a topic, that is the data that nodes can share by means of the publish/subscribe middleware.
+
+From the source code point of view a message is a subclass of `Core::MW::Message`.
+
+WARNING: The subclass must be defined as a packed struct using the `CORE_PACKED` macro.
+
+.A message derived from `Core::MW::Message`
+=================
+[source,cpp,numbered]
+----
+#pragma once
+
+#include <Core/MW/Message.hpp>
+
+struct example:
+	  public Core::MW::Message <1>
+{
+	  uint32_t value;
+} CORE_PACKED; <2>
+----
+<1> extend `Core::MW::Message`
+<2> make it a packed struct
+=================
+
+TIP: Even though it is possible to directly write the message code, it is better to use the facilities provided by link:../core/index.html#coremessage-reference[Core Message].
