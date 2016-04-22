@@ -1,0 +1,60 @@
+[[middleware-nodemanager]]
+== Node Manager
+`Core::MW::ICoreNodeManager` provides a simple way to synchronize a set on nodes by grouping lifecycle steps together 
+and calling the proper `CoreNode` methods in a coordinated way on a list of nodes, while checking for the success of the operations.
+
+.`ICoreNodeManager` interface
+[source,cpp,numbered]
+----
+#pragma once
+
+#include <Core/MW/namespace.hpp>
+
+#include <Core/MW/CoreNode.hpp>
+
+NAMESPACE_CORE_MW_BEGIN
+
+class ICoreNodeManager
+{
+public:
+	virtual void
+	add(
+			const CoreNode& node
+	) = 0;
+
+	virtual bool
+	setup() = 0;
+
+	virtual bool
+	run() = 0;
+
+	virtual bool
+	stop() = 0;
+
+	virtual bool
+	teardown() = 0;
+
+	virtual bool
+	isOk() = 0;
+
+};
+
+NAMESPACE_CORE_MW_END
+----
+
+`ICoreNodeManager::add()` permits to add a node to the list of nodes to synchronize.
+
+[cols="1,8", options="header"]
+.ICoreNodeManager -> CoreNode relation
+|===
+| ICoreNodeManager | CoreNode
+| `setup()`    | `setup()`
+| `run()`      | `execute(INITIALIZE)`, `execute(CONFIGURE)`, `execute(PREPARE_HW)`, `execute(PREPARE_MW)`, `execute(START)`
+| `stop()`     | `execute(STOP)`, `execute(FINALIZE)`
+| `teardown()` | `teardown()`
+|===
+
+All the methods listed above must return `false` if any of the nodes reaches an `ICoreNode::State::ERROR` state during the execution. +
+`ICoreNodeManager::isOk()` must also return `false` if any of the nodes is in a `ICoreNode::State::ERROR` state.
+
+`Core::MW::CoreNodeManager` implements `Core::MW::ICoreNodeManager`.
