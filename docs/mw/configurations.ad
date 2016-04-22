@@ -6,7 +6,7 @@
 ----
 led::LedPublisherConfiguration configuration;
 
-configuration["led"] = 5;
+configuration.led = 5;
 ----
 
 is the same as
@@ -15,7 +15,7 @@ is the same as
 ----
 led::LedPublisherConfiguration configuration;
 
-configuration.led = 5;
+configuration["led"] = 5;
 ----
 
 This is useful for a runtime configuration of the node.
