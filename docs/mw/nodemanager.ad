@@ -49,8 +49,8 @@ NAMESPACE_CORE_MW_END
 |===
 | ICoreNodeManager | CoreNode
 | `setup()`    | `setup()`
-| `run()`      | `execute(INITIALIZE)`, `execute(CONFIGURE)`, `execute(PREPARE_HW)`, `execute(PREPARE_MW)`, `execute(START)`
-| `stop()`     | `execute(STOP)`, `execute(FINALIZE)`
+| `run()`      | `execute(INITIALIZE)` -> `execute(CONFIGURE)` -> `execute(PREPARE_HW)` -> `execute(PREPARE_MW)` -> `execute(START)`
+| `stop()`     | `execute(STOP)` -> `execute(FINALIZE)`
 | `teardown()` | `teardown()`
 |===
 

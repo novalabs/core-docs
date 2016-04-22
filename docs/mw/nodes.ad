@@ -119,7 +119,7 @@ protected:
 <5> teardown the node
 <6> event handlers
 
-When are firstly created, an `Core::MW::ICoreNode` derived object must be in a `ICoreNode::State::NONE` state.
+When is firstly created, an `Core::MW::ICoreNode` derived object must be in a `ICoreNode::State::NONE` state.
 
 Calling `ICoreNode::setup()` will set up the node execution.
 State will change to `ICoreNode::State::SET_UP` once the node is ready.

@@ -17,9 +17,11 @@ receive (subscribe) from any channel (topic).
 In this document a more in-depth description of the following objects will be given.
 
 . Messages
-. Publishers
-. Subscribers
+. Publishers and Subscribers
 . Nodes
+. configurations
+. Node manager
+. Module
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -40,3 +42,7 @@ include::configurations.ad[tabsize=2]
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 include::nodemanager.ad[tabsize=2]
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::module.ad[tabsize=2]
