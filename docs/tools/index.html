@@ -573,7 +573,7 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel3">
 <li><a href="#_ls_4">ls</a></li>
 <li><a href="#_generate_3">generate</a></li>
-<li><a href="#_init_3">init</a></li>
+<li><a href="#_initialize">initialize</a></li>
 </ul>
 </li>
 </ul>
@@ -1029,6 +1029,9 @@ to be implemented
 <li>
 <p>generate the code of a workspace</p>
 </li>
+<li>
+<p>initialize a workspace</p>
+</li>
 </ol>
 </div>
 <div class="admonitionblock tip">
@@ -1049,19 +1052,15 @@ It is possible to use <kbd>TAB</kbd> to invoke sub-command and/or workspace name
 <dl>
 <dt class="hdlist1">ls</dt>
 <dd>
-<p><code>CoreWorkspace [options] ls</code><br>
-<code>CoreWorkspace [options] ls &lt;workspace-name&gt;</code><br>
-<code>CoreWorkspace [options] ls &lt;path-to-workspace&gt;</code></p>
+<p><code>CoreWorkspace [options] ls</code></p>
 </dd>
 <dt class="hdlist1">generate</dt>
 <dd>
-<p><code>CoreWorkspace [options] generate &lt;path-to-destination&gt;</code><br>
-<code>CoreWorkspace [options] generate &lt;workspace-name&gt; &lt;path-to-destination&gt;</code><br>
-<code>CoreWorkspace [options] generate &lt;path-to-workspace&gt; &lt;path-to-destination&gt;</code></p>
+<p><code>CoreWorkspace [options] generate [--force]</code></p>
 </dd>
-<dt class="hdlist1">init</dt>
+<dt class="hdlist1">initialize</dt>
 <dd>
-<p><code>CoreWorkspace [options] init &lt;path-to-destination&gt;</code></p>
+<p><code>CoreWorkspace [options] init [--force]</code></p>
 </dd>
 </dl>
 </div>
@@ -1101,27 +1100,6 @@ It is possible to use <kbd>TAB</kbd> to invoke sub-command and/or workspace name
 <p>For system workspaces it is also possible to specify the name of the workspace (e.g.: <code class="listing.console">$ CoreWorkspace.py ls led</code>).<br>
 For this last feature to work a <code>NOVA_CORE_ROOT</code> environment variable must be set with the path to the Core distribution.</p>
 </div>
-<div class="exampleblock">
-<div class="title">Example 4. Command <code>CoreWorkspace ls</code></div>
-<div class="content">
-<div class="paragraph">
-<p><code class="listing.console">$ CoreWorkspace.py ls led</code><br>
-<code class="listing.console">$ CoreWorkspace.py ls</code> inside <code>led</code> workspace directory<br>
-<code class="listing.console">$ CoreWorkspace.py ls &lt;path-to-led-workspace&gt;</code></p>
-</div>
-<div class="paragraph">
-<p>produces:</p>
-</div>
-<div class="listingblock console">
-<div class="content">
-<pre>╒══════════════════════════════════════════════════════════════════════════════╕
-│ PACKAGE                                                                      │
-╘══════════════════════════════════════════════════════════════════════════════╛
-TODO</pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="sect3">
 <h4 id="_generate_3">generate</h4>
@@ -1144,11 +1122,53 @@ TODO</pre>
 </li>
 </ol>
 </div>
+<div class="sect4">
+<h5 id="_options_5">Options</h5>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">--force</dt>
+<dd>
+<p>Force the generation even in presence of errors.</p>
+</dd>
+</dl>
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_init_3">init</h4>
+<h4 id="_initialize">initialize</h4>
 <div class="paragraph">
-<p>The <code>init</code> command initializes an empty workspace: it creates both a <code>WORKSPACE.json</code> file and a conforming directory structure.</p>
+<p>The <code>init</code> command initializes an empty workspace in the current directory.</p>
+</div>
+<div class="paragraph">
+<p>It creates:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>WORKSPACE.json</code> file</p>
+</li>
+<li>
+<p><code>setup.sh</code> file</p>
+</li>
+<li>
+<p>a conforming directory structure.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If a workspace is already initialized, it does nothing.
+It is possible to re-generate <code>setup.sh</code> by using the <code>--force</code> option.</p>
+</div>
+<div class="sect4">
+<h5 id="_options_6">Options</h5>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">--force</dt>
+<dd>
+<p>Force the re-initialization of an existing workspace. <strong>No source files are modified or deleted.</strong></p>
+</dd>
+</dl>
+</div>
 </div>
 </div>
 </div>
