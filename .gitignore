@@ -1,3 +1,5 @@
 *.cache
 *.orig
 *.tmp
+.DS_Store
+site

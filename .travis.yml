@@ -39,6 +39,6 @@ deploy:
     detect_encoding: true
 notifications:
     email:
-        on_failure: always    
+        on_failure: always
 
 
