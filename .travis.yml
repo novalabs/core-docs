@@ -5,7 +5,7 @@ install:
     - gem install asciidoctor
     - gem install asciidoctor-diagram
     - gem install coderay
-    - sudo apt-get install -y dot
+    - sudo apt-get install -y graphviz
 script:
     - mkdir site 
     - cd docs
