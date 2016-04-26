@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+    - 2.1.5
+install:
+    - gem install asciidoctor
+    - gem install asciidoctor-diagram
+    - gem install coderay
+script:
+    - cd docs/core/
+    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png  index.ad
