@@ -27,7 +27,7 @@ script:
     - cd ..
     - cd ..
     - cd site
-    - find . -name "*.cache" | xargs rm
+    - find . -name "*.cache" | xargs rm -f
     - cd ..
 deploy:
     provider: s3
