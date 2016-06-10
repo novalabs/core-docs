@@ -1,0 +1,24 @@
+[[tutorial-bootstrap]]
+== Bootstrapping a Core distribution
+
+[[tutorial-bootstrap-overview]]
+=== Overview
+In this tutorial it will be shown how to bootstrap a Core distribution.
+
+[[tutorial-workspace-initialization]]
+=== Step I: bootstrapping
+
+.Bootstrapping
+=================
+[listing.console]
+----
+$ mkdir ~/core_tutorial <1>
+$ cd ~/core_tutorial
+$ wget -qO- http://get-core.novalabs.io/ | sh <2>
+----
+<1> `~/core_tutorial` will be the home for all the tutorials that follow
+<2> here the magic happens.
+----
+=================
+
+WARNING: The installation script will ask you to give him either the root or sudo password. Do not worry: it is just to install the prerequisites (link:../getting-started/index.html[here] there are the details).

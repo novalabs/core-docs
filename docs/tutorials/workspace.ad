@@ -1,0 +1,163 @@
+[[tutorial-workspace]]
+== Working with the workspace
+
+[[tutorial-workspace-overview]]
+=== Overview
+In this tutorial it will be shown how to use the CLI tools to manage a workspace.
+
+[[tutorial-workspace-initialization]]
+=== Step I: initialization
+A workspace is nothing but a structured directory with a JSON file inside (link:../core/index.html#coreworkspace-reference[here] there are the details).
+
+To create the structure and the JSON file the `CoreWorkspace.py initialize` command is provided.
+
+.Creating an empty workspace
+=================
+[listing.console]
+----
+$ cd ~/core_tutorial
+$ source core/setup.sh
+$ mkdir my_workspace
+$ cd my_workspace
+$ CoreWorkspace.py initialize
+----
+
+generates the following files and directories:
+
+----
+.
+├── build
+│   ├── debug
+│   └── release
+├── generated
+│   ├── modules
+│   └── packages
+├── setup.sh
+├── sources
+│   ├── packages
+│   └── targets
+└── WORKSPACE.json
+----
+=================
+
+A `setup.sh` file is also generated. This files sets the environments variable needed by the workspace. It includes the Core `setup.sh` file, so you just need to source it.
+
+TIP: use the `--force` option to re-create the JSON and setup.sh files, without touching the contents of the workspace. It is useful, for example, if you move either the Core distribution or the workspace.
+
+[[tutorial-workspace-target]]
+=== Step II: add a target
+An empty workspace is pretty useless, so the first thing to do is to add a target to it (link:../core/index.html#coremoduletarget-reference[here] there are the details).
+
+To add a target to the workspace the `CoreWorkspace.py target add` command is provided.
+
+.Adding a target
+=================
+[listing.console]
+----
+$ source setup.sh
+$ CoreWorkspace.py target add usb usb_gateway
+----
+
+the tree is now:
+
+----
+.
+├── build
+│   ├── debug
+│   └── release
+├── generated
+│   ├── modules
+│   └── packages
+├── setup.sh
+├── sources
+│   ├── packages
+│   └── targets
+│       └── usb_gateway
+│           ├── main.cpp
+│           └── MODULE_TARGET.json
+└── WORKSPACE.json
+----
+=================
+
+[[tutorial-workspace-ls]]
+=== Step III: inspecting the workspace
+Now we have something in the workspace. But what do we have exactly?
+
+To inspect the content of a workspace the `CoreWorkspace.py ls` command is provided.
+
+.ls
+=================
+[listing.console]
+----
+$ CoreWorkspace.py ls
+----
+
+lists the content of the workspace, and all the dependencies needed to build it:
+
+----
+╒══════════════════════════════════════════════════════════════════════════════╕
+│ WORKSPACE                                                                    │
+╘══════════════════════════════════════════════════════════════════════════════╛
+=== TARGETS ====================================================================
+Name: usb_gateway
+Description: usb_gateway
+Module: usb
+Root: sources/targets/usb_gateway
+
+
+
+=== PACKAGE DEPENDENCIES =======================================================
+Package: common_msgs
+Source: Core
+Notes: 
+
+Package: led
+Source: Core
+Notes: 
+
+
+
+=== MODULE DEPENDENCIES ========================================================
+Module: usb
+Source: Core
+Notes: 
+
+
+SUCCESS
+----
+=================
+
+[[tutorial-workspace-generate]]
+=== Step IV: generate
+Now that we have a target, it is time to generate all the code, CMake files, Makefiles, Eclipse project, ...
+
+To add a target to the workspace the `CoreWorkspace.py generate` command is provided
+
+.Generating
+=================
+[listing.console]
+----
+$ CoreWorkspace.py generate debug
+----
+
+----
+----
+=================
+
+[[tutorial-workspace-build]]
+=== Step V: generate
+Now that we have the Makefiles, we can build the targets...
+
+To build a target, you must use `make`...
+
+.Generating
+=================
+[listing.console]
+----
+$ cd build/debug/usb_gateway
+$ make
+----
+
+----
+----
+=================

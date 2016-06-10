@@ -1,0 +1,24 @@
+= Tutorials
+Davide Rizzi <d.rizzi@novalabs.io>
+v1.0, 2016-04-28
+
+[[tutorials-overview]]
+Overview
+--------
+
+[quote, Captain James T. Kirk, 'Star Trek 2:24 - The Ultimate Computer']
+____
+But a genius doesn't work on an assembly line basis.
+Did Einstein, Kazanga, or... or Sitar of Vulcan produce new and revolutionary theories on a regular schedule?
+You can't simply say, _"Today I will be brilliant"_.
+____
+
+CAUTION: The tutorials are Work In Progress...
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::bootstrap.ad[tabsize=2]
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+include::workspace.ad[tabsize=2]
