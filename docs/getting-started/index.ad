@@ -15,3 +15,7 @@ References
 Make a directory that will contain the Core distribution.
 
 Then, inside that directory, `wget -qO- http://get-core.novalabs.io/ | sh` will setup everything you need to use Nova Core.
+
+== Do-it-yourself
+
+This is work in progress...
