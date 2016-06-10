@@ -14,11 +14,11 @@ ls::
 `CorePackage [options] ls <path-to-package>`
 
 generate::
-`CorePackage [options] generate <path-to-destination>` + 
 `CorePackage [options] generate <package-name> <path-to-destination>` +
-`CorePackage [options] generate <path-to-package> <path-to-destination>`
+`CorePackage [options] generate <path-to-package> <path-to-destination>` +
+`CorePackage [options] generate <path-to-destination>`
 
-init::
+initialize::
 `CorePackage [options] init <path-to-destination>`
 
 === Options
@@ -75,5 +75,5 @@ Source: configurations/SubscriberConfiguration.json
 ==== generate
 The `generate` command generates the package code.
 
-==== init
+==== initialize
 NOTE: to be implemented

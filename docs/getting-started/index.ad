@@ -9,3 +9,9 @@ This document describes how to get started with Nova Core.
 
 References
 ~~~~~~~~~~
+
+== Bootstrapping a Core distribution
+
+Make a directory that will contain the Core distribution.
+
+Then, inside that directory, `wget -qO- http://get-core.novalabs.io/ | sh` will setup everything you need to use Nova Core.

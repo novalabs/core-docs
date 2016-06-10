@@ -19,22 +19,7 @@ The `ls` command lists the content of a Core distribution.
 
 It can be used:
 
-* inside a  directory without any path or  name (e.g.: [listing.console]`$ Core.py ls`)
-* specifying the path to a  directory (e.g.: [listing.console]`$ Core.py ls <path-to->`)
+* inside a Core distribution directory, without any path (e.g.: [listing.console]`$ Core.py ls`) or specifying `.` as the path (e.g.: [listing.console]`$ Core.py ls .`)
+* specifying the path to a directory (e.g.: [listing.console]`$ Core.py ls <path-to-core-distribution>`)
+* anywhere, provided that the `NOVA_CORE_ROOT` environment variable is set with the path to the Core distribution.
 
-.Command `Core ls`
-=================
-[listing.console]`$ Core.py ls` inside `led`  directory +
-[listing.console]`$ Core.py ls <path-to-led->`
-
-produces:
-
-[listing.console]
-----
-╒══════════════════════════════════════════════════════════════════════════════╕
-│ PACKAGE                                                                      │
-╘══════════════════════════════════════════════════════════════════════════════╛
-
-TODO
-----
-=================

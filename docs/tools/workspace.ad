@@ -6,17 +6,20 @@
 . generate the code of a workspace
 . initialize a workspace
 
-TIP: It is possible to use kbd:[TAB] to invoke sub-command and/or workspace name completion.
+TIP: It is possible to use kbd:[TAB] to invoke sub-command completion.
 
 === Synopsis
 ls::
 `CoreWorkspace [options] ls`
 
+add a target::
+`CoreWorkspace [options] target add [module_name] [target_name]`
+
 generate::
-`CoreWorkspace [options] generate [--force]`
+`CoreWorkspace [options] generate [build_type] [--force]`
 
 initialize::
-`CoreWorkspace [options] init [--force]`
+`CoreWorkspace [options] initialize [--force]`
 
 === Options
 --verbose::
@@ -29,10 +32,22 @@ The `ls` command lists the content of a workspace.
 It can be used:
 
 * inside a workspace directory without any path or workspace name (e.g.: [listing.console]`$ CoreWorkspace.py ls`)
-* specifying the path to a workspace directory (e.g.: [listing.console]`$ CoreWorkspace.py ls <path-to-workspace>`)
 
-For system workspaces it is also possible to specify the name of the workspace (e.g.: [listing.console]`$ CoreWorkspace.py ls led`). +
-For this last feature to work a `NOVA_CORE_ROOT` environment variable must be set with the path to the Core distribution.
+==== target add
+The `target add` command:
+
+. creates a new target, using the standard template
+
+It can be used:
+
+* inside a workspace directory without any path or workspace name (e.g.: [listing.console]`$ CoreWorkspace.py target add usb usb_gateway`)
+
+=====  Options
+module_name::
+Name of the target module name
+
+target_name::
+Name of the target
 
 ==== generate
 The `generate` command:
@@ -42,21 +57,28 @@ The `generate` command:
 . generates the CMake files for the targets
 . generates, using CMake, the Makefiles and Eclipse projects for the targets
 
+It can be used:
+
+* inside a workspace directory without any path or workspace name (e.g.: [listing.console]`$ CoreWorkspace.py generate`)
+
 =====  Options
+build_type::
+You can choose between a `debug` or `release` build
+
 --force::
-Force the generation even in presence of errors.
+Force the generation even in presence of errors (such as unmet dependencies)
 
 ==== initialize
-The `init` command initializes an empty workspace in the current directory.
+The `initialize` command initializes an empty workspace in the current directory.
 
 It creates:
 
 * `WORKSPACE.json` file
 * `setup.sh` file
-* a conforming directory structure.
+* a conforming directory structure
 
 If a workspace is already initialized, it does nothing.
-It is possible to re-generate `setup.sh` by using the `--force` option.
+It is possible to re-generate `setup.sh` by using the `--force` option. This is useful if the workspace has been moved.
 
 =====  Options
 --force::

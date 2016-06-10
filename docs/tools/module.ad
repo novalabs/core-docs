@@ -40,24 +40,6 @@ It can be used:
 For system modules it is also possible to specify the name of the module (e.g.: [listing.console]`$ CoreModule.py ls led`). +
 For this last feature to work a `NOVA_CORE_ROOT` environment variable must be set with the path to the Core distribution.
 
-.Command `CoreModule ls`
-=================
-[listing.console]`$ CoreModule.py ls led` +
-[listing.console]`$ CoreModule.py ls` inside `led` module directory +
-[listing.console]`$ CoreModule.py ls <path-to-led-module>`
-
-produces:
-
-[listing.console]
-----
-╒══════════════════════════════════════════════════════════════════════════════╕
-│ PACKAGE                                                                      │
-╘══════════════════════════════════════════════════════════════════════════════╛
-
-TODO
-----
-=================
-
 ==== generate
 The `generate` command generates the module code.
 
