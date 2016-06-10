@@ -22,6 +22,9 @@ script:
     - cd getting-started
     - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/getting-started index.ad 
     - cd ..
+    - cd tutorials
+    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/tutorials index.ad 
+    - cd ..
     - cd ..
     - cd site
     - find . -name "*.cache" | xargs rm
