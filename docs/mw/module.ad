@@ -1,6 +1,6 @@
 [[middleware-module]]
 == Module
-`Core::MW::CoreModule` abstracts a Core module. 
+`core::mw::CoreModule` abstracts a Core module. 
 
 Each module must inherit from this class.
 
@@ -11,9 +11,9 @@ Each module must inherit from this class.
 
 #pragma once
 
-#include <Core/MW/namespace.hpp>
-#include <Core/MW/common.hpp>
-#include <Core/MW/CoreNodeManager.hpp>
+#include <core/mw/namespace.hpp>
+#include <core/mw/common.hpp>
+#include <core/mw/CoreNodeManager.hpp>
 
 NAMESPACE_CORE_MW_BEGIN
 
@@ -52,7 +52,7 @@ public:
 
 NAMESPACE_CORE_MW_END
 ----
-<1> inherits from `Core::MW::CoreNodeManager`
+<1> inherits from `core::mw::CoreNodeManager`
 <2> led class
 
 Lines 15-25 define the class that control the status led.
@@ -65,33 +65,38 @@ The implementation of the class is left to the derived module.
 ----
 #pragma once
 
-#include <Configuration.hpp>
-#include <Core/MW/CoreModule.hpp>
-#include <Core/MW/CoreSensor.hpp>
+#include <core/mw/CoreModule.hpp>
+#include <ModuleConfiguration.hpp>
 
-namespace sensors {}
-
-// Forward declarations
-namespace sensors {
-	class L3GD20H_Gyro;
-	class LSM303D_Acc;
-	class LSM303D_Mag;
+namespace core {
+namespace hw {
+class Pad;
+class SPIDevice;
+class I2CMaster;
+class EXTChannel;
+}
 }
 
 class Module:
-	public Core::MW::CoreModule <1>
+	public core::mw::CoreModule <1>
 {
 public:
-// --- DEVICES ----------------------------------------------------------------
-	static sensors::L3GD20H_Gyro& gyro;
-	static sensors::LSM303D_Acc&  acc;
-	static sensors::LSM303D_Mag&  mag;
-// ----------------------------------------------------------------------------
-
-
 	static bool
 	initialize(); <2>
 
+// --- DEVICES ----------------------------------------------------------------
+	static core::hw::Pad& d0;
+	static core::hw::Pad& d1;
+	static core::hw::Pad& d2;
+	static core::hw::Pad& d3;
+	static core::hw::Pad& d4;
+	static core::hw::Pad& d5;
+	static core::hw::Pad& d6;
+	static core::hw::Pad& d7;
+
+	static core::hw::SPIDevice& spi;
+	static core::hw::I2CMaster& i2c;
+// ----------------------------------------------------------------------------
 
 	Module();
 	virtual ~Module() {}
@@ -103,88 +108,73 @@ public:
 
 .Using a module derived from `CoreNode`
 =================
-The following is the `main.cpp` from a target using the IMU module.
+The following is the `main.cpp` from a target using the IO module.
 
 [source,cpp,numbered]
 ----
-#include <Configuration.hpp>
+#include <ModuleConfiguration.hpp>
 #include <Module.hpp> <1>
 
+// MESSAGES
+#include <core/common_msgs/Led.hpp>
 
-// --- MESSAGES ---------------------------------------------------------------
-#include <common_msgs/Led.hpp>
+// NODES
+#include <core/led/Subscriber.hpp>
 
-
-// --- NODES ------------------------------------------------------------------
-#include <sensors/Publisher.hpp>
-#include <led/Subscriber.hpp>
-
-
-// --- BOARD IMPL -------------------------------------------------------------
-#include <sensors/L3GD20H.hpp> <2>
-#include <sensors/LSM303D.hpp>
-
+// BOARD IMPL
+#include <core/hw/EXT.hpp> <2>
+#include <core/hw/GPIO.hpp>
+#include <core/hw/SPI.hpp>
+#include <core/hw/I2C.hpp>
 
 // *** DO NOT MOVE ***
 Module module; <3>
 
+// TYPES
 
-// --- TYPES ------------------------------------------------------------------
-using Vector3_i16_Publisher = sensors::Publisher<common_msgs::Vector3_i16>;
+// NODES
+core::led::Subscriber led_subscriber("led_subscriber", core::os::Thread::PriorityEnum::LOWEST); <4>
 
-
-// --- NODES ------------------------------------------------------------------
-led::Subscriber led_subscriber("led_subscriber", Core::MW::Thread::PriorityEnum::LOWEST);
-
-Vector3_i16_Publisher gyro_publisher("gyro_publisher", module.gyro);
-Vector3_i16_Publisher acc_publisher("acc_publisher", module.acc);
-Vector3_i16_Publisher mag_publisher("mag_publisher", module.mag);
-
-
-// --- MAIN -------------------------------------------------------------------
+// MAIN
 extern "C" {
 	int
 	main()
 	{
-		module.initialize(); <4>
+		module.initialize(); <5>
 
-		// Nodes configuration
-		led_subscriber.configuration["topic"] = "led";
+		// Led subscriber node
+		core::led::SubscriberConfiguration led_subscriber_configuration;
+		led_subscriber_configuration.topic = "led";
+		led_subscriber.setConfiguration(led_subscriber_configuration); <6>
+		module.add(led_subscriber); <7>
 
-		gyro_publisher.configuration["topic"] = "gyro";
-		acc_publisher.configuration["topic"]  = "acc";
-		mag_publisher.configuration["topic"]  = "mag";
-
-		// Add nodes to the module...
-		module.add(led_subscriber); <5>
-		module.add(gyro_publisher);
-		module.add(acc_publisher);
-		module.add(mag_publisher);
-
-		// ... and let's play!
-		module.setup(); <6>
-		module.run(); <7>
+		// Setup and run
+		module.setup(); <8>
+		module.run(); <9>
 
 		// Is everything going well?
 		for (;;) {
-			if (!module.isOk()) { <8>
+			if (!module.isOk()) { <10>
 				module.halt("This must not happen!");
 			}
 
-			Core::MW::Thread::sleep(Core::MW::Time::ms(500));
+			core::os::Thread::sleep(core::os::Time::ms(500));
 		}
 
-		return Core::MW::Thread::OK;
-	} // main
+		return core::os::Thread::OK;
+	    }
 }
+
 
 ----
 <1> include the header file for the derived module
 <2> include the implementation of the forward declarations in `Module.hpp`
 <3> module instance
-<4> initialize the module
-<5> add nodes to the module
-<6> setup the nodes
-<7> run the nodes
-<8> check that everything is ok
+<4> nodes instances
+<5> initialize the module
+<6> configure the nodes
+<7> add nodes to the module
+<8> setup the nodes
+<9> run the nodes
+<10> check that everything is ok
 =================

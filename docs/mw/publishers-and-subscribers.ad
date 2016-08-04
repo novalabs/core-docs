@@ -2,7 +2,7 @@
 == Publishers and Subscribers
 [[middleware-publisher]]
 === Publisher
-A publisher is defined as an instance of `Core::MW::Publisher<typename MessageType>` class.
+A publisher is defined as an instance of `core::mw::Publisher<typename MessageType>` class.
 
 The class template must be specialized using the message type of the topic it will publish to.
 
@@ -10,9 +10,9 @@ The class template must be specialized using the message type of the topic it wi
 =================
 [source,cpp,numbered]
 ----
-common_msgs::Led* msg;
+core::common_msgs::Led* msg;
 
-Core::MW::Publisher<common_msgs::Led> publisher; <1>
+core::mw::Publisher<core::common_msgs::Led> publisher; <1>
 
 if (publisher.alloc(msg)) { // <2>
 
@@ -30,14 +30,14 @@ if (publisher.alloc(msg)) { // <2>
 <4> publish it
 =================
 
-The `Core::MW::Publisher::alloc()` method will return false where there are no subscribers to the topic. +
-The `Core::MW::Publisher::publish()` method will return false when TODO.
+The `core::mw::Publisher::alloc()` method will return false where there are no subscribers to the topic. +
+The `core::mw::Publisher::publish()` method will return false when TODO.
 
 NOTE: It is up to the node to tell the system that the publisher exists. This will be discussed in the <<middleware-nodes>> section.
 
 [[middleware-subscriber]]
 === Subscriber
-A subscriber is defined as an instance of `Core::MW::Subscriber<typename MessageType, unsigned QUEUE_LENGTH>` class.
+A subscriber is defined as an instance of `core::mw::Subscriber<typename MessageType, unsigned QUEUE_LENGTH>` class.
 
 The class template must be specialized using the message type of the topic it will subscribe to and the length of the message queue.
 The message queue length (`QUEUE_LENGTH`) _must be_ at least 2.
@@ -45,7 +45,7 @@ The message queue length (`QUEUE_LENGTH`) _must be_ at least 2.
 There are 2 ways to consume the data received:
 
 * registering a callback
-* using `Core::MW::Subscriber::fetch()`
+* using `core::mw::Subscriber::fetch()`
 
 NOTE: It is up to the node to tell the system that the subscriber exists. This will be discussed in the <<middleware-nodes>> section.
 
@@ -53,7 +53,7 @@ NOTE: It is up to the node to tell the system that the subscriber exists. This w
 ==== Callback
 It is possible to register a subscriber callback the node will call on its spin() method (more on this later).
 
-The callback function signature for a `Core::MW::Subscriber<typename MessageType, unsigned QUEUE_LENGTH>` subscriber is:
+The callback function signature for a `core::mw::Subscriber<typename MessageType, unsigned QUEUE_LENGTH>` subscriber is:
 
 .Callback data type
 [source,cpp,numbered]
@@ -64,7 +64,7 @@ typedef bool (* Callback)(
 );
 ----
 
-The callback function can be registered using `Core::MW::Subscriber::set_callback()` method.
+The callback function can be registered using `core::mw::Subscriber::set_callback()` method.
 
 The node parameter is required to easily allow multiple instance of the subscriber (as the callback is a C function-pointer).
 
@@ -78,8 +78,8 @@ subscriber.set_callback(LedSubscriber::callback); <1>
 
 bool
 LedSubscriber::callback(
-		const common_msgs::Led& msg,
-		Core::MW::Node*         node
+		const core::common_msgs::Led& msg,
+		core::mw::Node*         node
 )
 {
 	LedSubscriber* _this = static_cast<LedSubscriber*>(node); // <2>
@@ -99,7 +99,7 @@ TIP: If the callback is a class member function, it _MUST_ be made `static` (to 
 =================
 [source,cpp,numbered]
 ----
-common_msgs::Led* msg;
+core::common_msgs::Led* msg;
 
 if (subscriber.fetch(msg)) {
 	setLedValue(msg.value);
@@ -107,4 +107,4 @@ if (subscriber.fetch(msg)) {
 ----
 =================
 
-The `Core::MW::Subscriber::fetch()` method will return false where there are no messages in the queue.
+The `core::mw::Subscriber::fetch()` method will return false where there are no messages in the queue.

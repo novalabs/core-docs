@@ -1,6 +1,6 @@
 [[middleware-nodemanager]]
 == Node Manager
-`Core::MW::ICoreNodeManager` provides a simple way to synchronize a set on nodes by grouping lifecycle steps together 
+`core::mw::ICoreNodeManager` provides a simple way to synchronize a set on nodes by grouping lifecycle steps together 
 and calling the proper `CoreNode` methods in a coordinated way on a list of nodes, while checking for the success of the operations.
 
 .`ICoreNodeManager` interface
@@ -8,9 +8,9 @@ and calling the proper `CoreNode` methods in a coordinated way on a list of node
 ----
 #pragma once
 
-#include <Core/MW/namespace.hpp>
+#include <core/mw/namespace.hpp>
 
-#include <Core/MW/CoreNode.hpp>
+#include <core/mw/CoreNode.hpp>
 
 NAMESPACE_CORE_MW_BEGIN
 
@@ -57,4 +57,4 @@ NAMESPACE_CORE_MW_END
 All the methods listed above must return `false` if any of the nodes reaches an `ICoreNode::State::ERROR` state during the execution. +
 `ICoreNodeManager::isOk()` must also return `false` if any of the nodes is in a `ICoreNode::State::ERROR` state.
 
-`Core::MW::CoreNodeManager` implements `Core::MW::ICoreNodeManager`.
+`core::mw::CoreNodeManager` implements `core::mw::ICoreNodeManager`.

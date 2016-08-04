@@ -49,22 +49,25 @@ The code generator relies on the C preprocessor to keep the generated code clean
 ----
 #pragma once
 
-#include <Core/MW/CoreConfiguration.hpp>
+#include <core/mw/CoreConfiguration.hpp>
 
+namespace core {
 namespace led {
 
-CORE_CONFIGURATION_BEGIN(LedPublisherConfiguration) //LED Publisher node configuration
+CORE_CONFIGURATION_BEGIN(PublisherConfiguration) //LED Publisher node configuration
 	CORE_CONFIGURATION_FIELD(topic, CHAR, 16) // Name of the topic to publish to
 	CORE_CONFIGURATION_FIELD(led, UINT32, 1) // Which led
 CORE_CONFIGURATION_MAP_BEGIN(2)
-	CORE_CONFIGURATION_MAP_ENTRY(LedPublisherConfiguration, topic)
-	CORE_CONFIGURATION_MAP_ENTRY(LedPublisherConfiguration, led)
+	CORE_CONFIGURATION_MAP_ENTRY(PublisherConfiguration, topic)
+	CORE_CONFIGURATION_MAP_ENTRY(PublisherConfiguration, led)
 CORE_CONFIGURATION_MAP_END()
+CORE_CONFIGURATION_SIGNATURE(0x73fc44ae)
 CORE_CONFIGURATION_END()
 
 }
+}
 ----
 
-Array type fields will be implemented using `Core::MW::Array` class template (that is a stripped down std::array).
+Array type fields will be implemented using `core::Array` class template (that is a stripped down std::array).
 
-From the source code point of view, messages are classes that inherit from `Core::MW::CoreConfiguration` class.
+From the source code point of view, messages are classes that inherit from `core::mw::CoreConfiguration` class.

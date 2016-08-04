@@ -18,4 +18,10 @@ Then, inside that directory, `wget -qO- http://get-core.novalabs.io/ | sh` will 
 
 == Do-it-yourself
 
-This is work in progress...
+=== Prerequisites
+
+* python
+* python-pip
+* git
+* CMake
+* i386 version of the libc (for the toolchain)

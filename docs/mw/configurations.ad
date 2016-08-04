@@ -1,10 +1,10 @@
 [[middleware-configurations]]
 == Configurations
-`Core::MW::CoreConfiguration` class implements a kind-of reflection system, which allows to access derived class members by their name:
+`core::mw::CoreConfiguration` class implements a kind-of reflection system, which allows to access derived class members by their name:
 
 [source,cpp,numbered]
 ----
-led::LedPublisherConfiguration configuration;
+core::led::LedPublisherConfiguration configuration;
 
 configuration.led = 5;
 ----
@@ -13,7 +13,7 @@ is the same as
 
 [source,cpp,numbered]
 ----
-led::LedPublisherConfiguration configuration;
+core::led::LedPublisherConfiguration configuration;
 
 configuration["led"] = 5;
 ----
@@ -31,7 +31,7 @@ It is better to always force the type by using an explicit cast or the user defi
 
 [source,cpp,numbered]
 ----
-led::LedPublisherConfiguration configuration;
+core::led::LedPublisherConfiguration configuration;
 
 configuration["led"] = (uint32_t)5; <1>
 configuration["led"] = 5_u32; <2>

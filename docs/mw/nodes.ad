@@ -5,13 +5,13 @@ topic based publish/subscribe pattern (see https://en.wikipedia.org/wiki/Publish
 
 From the source code point of view a node can be defined in two different ways:
 
-* as subclass of `Core::MW::CoreNode`
+* as subclass of `core::mw::CoreNode`
 * as an OS thread
 
 The first approach permits to control the execution flow and is the preferred way to implement a node. +
 The latter approach, whilst apparently simpler, does not offer any control on the Node lifecycle.
 
-Nodes defined as subclasses of `Core::MW::CoreNode` share other important features:
+Nodes defined as subclasses of `core::mw::CoreNode` share other important features:
 
 * they can be described using a JSON file, allowing automatic code generation
 * they can be easily configured by means of a configuration system
@@ -21,7 +21,7 @@ Nodes defined as subclasses of `Core::MW::CoreNode` share other important featur
 === CoreNode
 [[middleware-corenode-icorenode]]
 ==== ICoreNode and the node lifecycle
-The `Core::MW::ICoreNode` interface describes the lifecycle of a node.
+The `core::mw::ICoreNode` interface describes the lifecycle of a node.
 
 .Interface `ICoreNode`
 [source,cpp,numbered]
@@ -119,7 +119,7 @@ protected:
 <5> teardown the node
 <6> event handlers
 
-When is firstly created, an `Core::MW::ICoreNode` derived object must be in a `ICoreNode::State::NONE` state.
+When is firstly created, an `core::mw::ICoreNode` derived object must be in a `ICoreNode::State::NONE` state.
 
 Calling `ICoreNode::setup()` will set up the node execution.
 State will change to `ICoreNode::State::SET_UP` once the node is ready.
@@ -162,7 +162,7 @@ The node must switch to a `ICoreNode::State::TEARING_DOWN` state and then, to `I
 `ICoreNode::teardown()` must also be called when a `ICoreNode `object is destroyed.
 
 See <<icorenode-state-machine-diagram>> for a description of the state transitions.
-There is no reference to `Core::MW::ICoreNode::teardown()`, but it must always be possible to call it in every moment.
+There is no reference to `core::mw::ICoreNode::teardown()`, but it must always be possible to call it in every moment.
 
 .`ICoreNode` state machine
 [[icorenode-state-machine-diagram]]
@@ -230,46 +230,46 @@ FINALIZING --> ERROR: [onFinalize() == false]
 ----
 #pragma once
 
-#include <Core/MW/namespace.hpp>
+#include <core/mw/namespace.hpp>
 
-#include <Core/MW/Thread.hpp>
-#include <Core/MW/Condition.hpp>
-#include <Core/MW/Mutex.hpp>
-#include <Core/MW/Node.hpp>
+#include <core/os/Thread.hpp>
+#include <core/os/Condition.hpp>
+#include <core/os/Mutex.hpp>
+#include <core/mw/Node.hpp>
 
-#include <Core/MW/ICoreNode.hpp>
+#include <core/mw/ICoreNode.hpp>
 
 NAMESPACE_CORE_MW_BEGIN
 
 class CoreNode:
 	public ICoreNode,
-	protected Core::MW::Node
+	protected core::mw::Node
 {
 public:
 	virtual ~CoreNode() {}
 
 	CoreNode(
 			const char*                    name,
-			Core::MW::Thread::PriorityEnum priority = Core::MW::Thread::PriorityEnum::NORMAL
+			core::mw::Thread::PriorityEnum priority = core::mw::Thread::PriorityEnum::NORMAL
 	);
 
 ...	
 ----
 
-The `Core::MW::CoreNode` class offers the developer the possibility to cleanly implement all the possible aspects related to a node by implementing the `Core::MW::ICoreNode` interface.
+The `core::mw::CoreNode` class offers the developer the possibility to cleanly implement all the possible aspects related to a node by implementing the `core::mw::ICoreNode` interface.
 
 Calling `CoreNode::setup()` will create the node execution thread.
 State will change to `CoreNode::State::SET_UP` once the thread has been created.
 
-Implementing a new node requires to extend `Core::MW::CoreNode`, and to override the default event member functions as required. +
-`Core::MW::CoreNode` constructor takes 2 arguments, the node name and the node thread priority.
+Implementing a new node requires to extend `core::mw::CoreNode`, and to override the default event member functions as required. +
+`core::mw::CoreNode` constructor takes 2 arguments, the node name and the node thread priority.
 
-TIP: The event member functions by default return `true`, so it is not needed to implement these in `Core::MW::CoreNode` derived classes.
+TIP: The event member functions by default return `true`, so it is not needed to implement these in `core::mw::CoreNode` derived classes.
 
-`Core::MW::CoreNode` extends a lower-level `Core::MW::Node` class. +
+`core::mw::CoreNode` extends a lower-level `core::mw::Node` class. +
 This class offers methods to notify the system that topic are going to be published and/or subscribed.
 
-.`Core::MW::Node` advertise and publish methods
+.`core::mw::Node` advertise and publish methods
 [source,cpp,numbered]
 ----
 	template <typename MT>
@@ -298,7 +298,7 @@ This class offers methods to notify the system that topic are going to be publis
 	);
 ----
 
-A `Core::MW::CoreNode` object can be added to a `Core::MW::CoreNodeManager` (such as a `Core::MW::CoreModule`). +
+A `core::mw::CoreNode` object can be added to a `core::mw::CoreNodeManager` (such as a `core::mw::CoreModule`). +
 In this way all the nodes lifecycles are syncronized.
 It is also easier and more concise than calling all the `execute()` while checking for the return value and states.
 
@@ -309,22 +309,23 @@ It is also easier and more concise than calling all the `execute()` while checki
 ----
 #pragma once
 
-#include <Core/MW/CoreNode.hpp>
-#include <Core/MW/Publisher.hpp>
+#include <core/mw/CoreNode.hpp>
+#include <core/mw/Publisher.hpp>
 
-#include <common_msgs/Led.hpp>
-#include <led/PublisherConfiguration.hpp>
+#include <core/common_msgs/Led.hpp>
+#include <core/led/PublisherConfiguration.hpp>
 
 #include <array>
 
+namespace core {
 namespace led {
 	class Publisher:
-		public Core::MW::CoreNode
+		public core::mw::CoreNode
 	{
 public: // CONSTRUCTOR and DESTRUCTOR
 		Publisher(
 				const char*                    name,
-				Core::MW::Thread::PriorityEnum priority = Core::MW::Thread::PriorityEnum::NORMAL
+				core::mw::Thread::PriorityEnum priority = core::mw::Thread::PriorityEnum::NORMAL
 		);
 		virtual
 		~Publisher();
@@ -333,7 +334,7 @@ public: // CONFIGURATION
 		PublisherConfiguration configuration;
 
 private: // PUBLISHERS and SUBSCRIBERS
-		Core::MW::Publisher<common_msgs::Led> _publisher;
+		core::mw::Publisher<common_msgs::Led> _publisher;
 
 private: // PRIVATE MEMBERS
 		uint32_t _toggle;
@@ -346,6 +347,7 @@ private: // EVENTS
 		onLoop();
 	};
 }
+}
 ----
 =================
 
@@ -355,7 +357,7 @@ In this approach a node is defined directly as a thread.
 
 The main node loop must call node `Node::spin()` member function, that dispatches the messages around.
 
-.`Core::MW::Node` spin method
+.`core::mw::Node` spin method
 [source,cpp,numbered]
 ----
 bool
@@ -378,12 +380,12 @@ test_subscriber_node(
 {
 	common_msgs::String64* msgp;
 	
-	Core::MW::Node node("test_sub"); <1>
-	Core::MW::Subscriber<common_msgs::String64, 5> sub; <2>
+	core::mw::Node node("test_sub"); <1>
+	core::mw::Subscriber<core::common_msgs::String64, 5> sub; <2>
 	node.subscribe(sub, "test"); <3>
 
 	for (;;) {
-		node.spin(Core::MW::Time::ms(1000)); <4>
+		node.spin(core::mw::Time::ms(1000)); <4>
 
 		if (sub.fetch(msgp)) {
 			module.stream.printf("%s\r\n", msgp->data);
@@ -403,7 +405,7 @@ And later on, create a thread with it.
 [source,cpp,numbered]
 ----
 ...
-Core::MW::Thread::create_heap(NULL, THD_WORKING_AREA_SIZE(1024), NORMALPRIO, test_subscriber_node, nullptr);
+core::os::Thread::create_heap(NULL, THD_WORKING_AREA_SIZE(1024), NORMALPRIO, test_subscriber_node, nullptr);
 ...
 ----
 =================

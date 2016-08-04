@@ -51,18 +51,20 @@ The code generator relies on the C preprocessor to keep the generated code clean
 ----
 #pragma once
 
-#include <Core/MW/CoreMessage.hpp>
+#include <core/mw/CoreMessage.hpp>
 
+namespace core {
 namespace common_msgs {
 
-CORE_MESSAGE_BEGIN(Led) // Status LED
-	CORE_MESSAGE_FIELD(led, UINT32, 1) // Which led?
+CORE_MESSAGE_BEGIN(Led) //Status LED
+	CORE_MESSAGE_FIELD(led, UINT32, 1) // Which led
 	CORE_MESSAGE_FIELD(value, UINT8, 1) // Value of the led
 CORE_MESSAGE_END
 
 }
+}
 ----
 
-Array type fields will be implemented using `Core::MW::Array` class template (that is a stripped down std::array).
+Array type fields will be implemented using `core::Array` class template (that is a stripped down std::array).
 
-From the source code point of view, messages are classes that inherit from `Core::MW::Message` class.
+From the source code point of view, messages are classes that inherit from `core::mw::Message` class.

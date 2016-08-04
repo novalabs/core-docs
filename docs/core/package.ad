@@ -33,17 +33,17 @@ The file must be valid according to an Apache Avro footnoteref:[AVRO] schema.
 {
   "name": "led", <1>
   "description": "LED Nodes", <2>
-  "namespace": "@", <3>
-  "sources": [ <4>
-    "PublisherNode.cpp",
-    "SubscriberNode.cpp"
-   ]
+  "provider": "core" <3>
 }
 ----
 <1> the `name` of the message field must match the name of the package directory
 <2> a brief description
-<3> by default ('@') the namespace will be the name of the package; `namespace` can be used to override it
-<4> list of source files that will be compiled and linked with the target
+<3> `provider` is used to avoid a name clash between packages
+
+`provider` is used to generate a namespace that will enclose all the code generated from the contents of the package (i.e.: `core::led`). +
+The same name is used to keep the header files well separated (i.e.: `#include <core/led/Publisher.hpp>`).
+
+For the packages provided by Nova Labs, it will be `core`.
 
 [[corepackage-structure]]
 === Package directory structure

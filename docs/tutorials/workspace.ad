@@ -131,7 +131,7 @@ SUCCESS
 === Step IV: generate
 Now that we have a target, it is time to generate all the code, CMake files, Makefiles, Eclipse project, ...
 
-To add a target to the workspace the `CoreWorkspace.py generate` command is provided
+To add a target to the workspace the `CoreWorkspace.py generate` command is provided.
 
 .Generating
 =================
@@ -145,12 +145,12 @@ $ CoreWorkspace.py generate debug
 =================
 
 [[tutorial-workspace-build]]
-=== Step V: generate
+=== Step V: build
 Now that we have the Makefiles, we can build the targets...
 
 To build a target, you must use `make`...
 
-.Generating
+.Building a target
 =================
 [listing.console]
 ----
