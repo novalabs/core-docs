@@ -1,0 +1,9 @@
+= Core Hardware Reference
+
+[[hardware-overview]]
+== Overview
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+<<io_module/index.adoc#,IO module>>
+

@@ -1,0 +1,10 @@
+[width="50%",cols=">20%m,<30%m,<50%m",frame="topbot",options="header"]
+|================
+|Pin # |Name    |Description
+|1     |VCC     |Power supply (3.3V)
+|2     |GND     |Ground
+|3     |MISO    |Master In - Slave Out
+|4     |MOSI    |Master Out - Slave In
+|5     |SCK     |Clock
+|6     |CS      |Chip Select
+|================

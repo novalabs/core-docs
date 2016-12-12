@@ -1,5 +1,6 @@
 *.cache
 *.orig
 *.tmp
+*.html
 .DS_Store
 site

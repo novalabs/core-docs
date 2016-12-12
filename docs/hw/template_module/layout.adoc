@@ -1,0 +1,4 @@
+[[layout]]
+== Layout
+
+image::XXX_module-wiring.png[Layout, 480]

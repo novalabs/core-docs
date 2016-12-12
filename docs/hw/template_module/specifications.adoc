@@ -1,0 +1,6 @@
+[[specifications]]
+== Specifications
+
+.Processor
+include::../common/stm32f303_specs.adoc[]
+

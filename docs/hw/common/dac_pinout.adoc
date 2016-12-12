@@ -1,0 +1,8 @@
+[width="50%",cols=">20%m,<30%m,<50%m",frame="topbot",options="header"]
+|================
+|Pin # |Name    |Description
+|1     |VCC     |Power supply (3.3V)
+|2     |GND     |Ground
+|3     |O1      |Analog output (0-3.3V)
+|4     |O2      |Analog output (0-3.3V)
+|================

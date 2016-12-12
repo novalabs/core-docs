@@ -1,0 +1,2 @@
+[[description]]
+Integrate existing hardware into the real-time Nova Core bus with analog and digital signals.

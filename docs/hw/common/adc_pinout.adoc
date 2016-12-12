@@ -1,0 +1,10 @@
+[width="50%",cols=">20%,<30%,<50%",frame="topbot",options="header"]
+|================
+|Pin # |Name    |Description
+|1     |VCC     |Power supply (3.3V)
+|2     |GND     |Ground
+|3     |A1      |Analog input (0-3.3V)
+|4     |A2      |Analog input (0-3.3V)
+|5     |A3      |Analog input (0-3.3V)
+|6     |A4      |Analog input (0-3.3V)
+|================

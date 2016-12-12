@@ -1,0 +1,9 @@
+.Core Bus
+[width="50%",cols=">20%m,<30%m,<50%m",frame="topbot",options="header"]
+|================
+|Pin # |Name    |Description
+|1     |GND     |Ground
+|2     |VCC     |Power supply (5-48V)
+|3     |CANL    |CAN Low
+|4     |CANH    |CAN High
+|================

@@ -1,0 +1,26 @@
+[[pinout]]
+== Pinout
+
+.ADC port (ADC)
+include::../common/adc_pinout.adoc[]
+
+.GPIO 1 port (D1)
+include::../common/gpio_pinout.adoc[]
+
+.GPIO 2 port (D2)
+include::../common/gpio_pinout.adoc[]
+
+.UART 1 port (U1)
+include::../common/uart_pinout.adoc[]
+
+.UART 2 port (U2)
+include::../common/uart_pinout.adoc[]
+
+.I2C port (I2C)
+include::../common/i2c_pinout.adoc[]
+
+.SPI port (SPI)
+include::../common/spi_pinout.adoc[]
+
+.DAC port (DAC)
+include::../common/dac_pinout.adoc[]

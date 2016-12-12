@@ -1,0 +1,4 @@
+- 32bit STM32F303 Cortex M4 core with FPU
+- 72 MHz
+- 40 Kb RAM
+- 256 Kb Flash

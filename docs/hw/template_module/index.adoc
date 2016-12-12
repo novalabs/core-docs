@@ -1,0 +1,16 @@
+[[XXX-module]]
+= XXX module
+
+include::description.adoc[]
+
+include::layout.adoc[]
+
+include::specifications.adoc[]
+
+include::voltage_ratings.adoc[]
+
+include::pinout.adoc[]
+
+include::../common/common_pinout.adoc[]
+
+================

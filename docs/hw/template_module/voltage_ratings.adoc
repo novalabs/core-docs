@@ -1,0 +1,16 @@
+[[voltage_ratings]]
+== Voltage Ratings
+
+.Recommended Operating Conditions
+[width="100%",cols="<50%m,^20%m,^10%m,^10%m,^10%m",frame="topbot",options="header"]
+|================
+|Parameter            |Symbol |MIN | MAX |Units
+|Bus supply voltage   |Vbus   |5   | 48  |V
+|================
+
+.Absolute Maximum Ratings
+[width="100%",cols="<50%m,^20%m,^20%m,^10%m",frame="topbot",options="header"]
+|================
+|Parameter            |Symbol |Rating |Units
+|Bus supply voltage   |Vbus   |0 to 60 |V
+|================
