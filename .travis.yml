@@ -25,6 +25,9 @@ script:
     - cd tutorials
     - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/tutorials index.ad 
     - cd ..
+    - cd hw
+    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/hw index.ad 
+    - cd ..
     - cd ..
     - cd site
     - find . -name "*.cache" | xargs rm -f

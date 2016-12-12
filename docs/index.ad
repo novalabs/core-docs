@@ -5,6 +5,8 @@ v1.0, 2016-04-19
 == Reference Manuals
 link:getting-started/index.html[Getting Started]
 
+link:getting-started/index.html[Hardware]
+
 link:core/index.html[Core]
 
 link:mw/index.html[Core Middleware]
