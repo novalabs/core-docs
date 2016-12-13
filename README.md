@@ -3,18 +3,18 @@
 
 ## Install prerequisites
 
-'''bash
+```bash
 sudo apt-get install -y graphviz
-'''
+```
 
-'''bash
+```bash
 gem install asciidoctor
 gem install asciidoctor-diagram
 gem install coderay
-'''
+```
 
 ## Render HTML output
 
-'''bash
+```bash
 make
-'''
+```
