@@ -1,6 +1,4 @@
 = Core Middleware
-Davide Rizzi <d.rizzi@novalabs.io>
-v1.0, 2016-04-13
 
 [[middleware-overview]]
 == Overview
