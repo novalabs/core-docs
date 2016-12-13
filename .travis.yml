@@ -9,24 +9,24 @@ install:
 script:
     - mkdir site 
     - cd docs
-    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../site index.ad 
+    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../site index.adoc
     - cd core
-    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/core index.ad 
+    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/core index.adoc 
     - cd ..
     - cd mw
-    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/mw index.ad 
+    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/mw index.adoc 
     - cd ..
     - cd tools
-    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/tools index.ad 
+    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/tools index.adoc 
     - cd ..
     - cd getting-started
-    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/getting-started index.ad 
+    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/getting-started index.adoc 
     - cd ..
     - cd tutorials
-    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/tutorials index.ad 
+    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/tutorials index.adoc 
     - cd ..
     - cd hw
-    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/hw index.ad 
+    - asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -D ../../site/hw index.adoc 
     - cd ..
     - cd ..
     - cd site
