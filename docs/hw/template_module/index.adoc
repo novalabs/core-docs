@@ -1,16 +1,45 @@
 [[XXX-module]]
 = XXX module
 
-include::description.adoc[]
+[[description]]
+XXX description
 
-include::layout.adoc[]
+[[layout]]
+== Layout
 
-include::specifications.adoc[]
+image::XXX_module-wiring.png[Layout, 480]
 
-include::voltage_ratings.adoc[]
+[[specifications]]
+== Specifications
 
-include::pinout.adoc[]
+.Processor
+include::../common/stm32f303_specs.adoc[]
 
-include::../common/common_pinout.adoc[]
+[[voltage_ratings]]
+== Voltage Ratings
+
+.Recommended Operating Conditions
+[width="100%",cols="<50%,^20%,^10%,^10%,^10%",frame="topbot",options="header"]
+|================
+|Parameter            |Symbol |MIN | MAX |Units
+|Bus supply voltage   |Vbus   |5   | 48  |V
+|================
+
+.Absolute Maximum Ratings
+[width="100%",cols="<50%m,^20%,^20%,^10%",frame="topbot",options="header"]
+|================
+|Parameter            |Symbol |Rating |Units
+|Bus supply voltage   |Vbus   |0 to 60 |V
+|================
+
+
+[[pinout]]
+== Pinout
+
+.Core Bus
+include::../common/core_bus_pinout.adoc[]
+
+.JTAG
+include::../common/jtag_pinout.adoc[]
 
 ================

@@ -1,5 +1,5 @@
 .Core Bus
-[width="50%",cols=">20%m,<30%m,<50%m",frame="topbot",options="header"]
+[width="50%",cols=">20%,<30%,<50%",frame="topbot",options="header"]
 |================
 |Pin # |Name    |Description
 |1     |GND     |Ground
