@@ -25,24 +25,24 @@ In this document a more in-depth description of the following objects will be gi
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::messages.ad[tabsize=2]
+include::messages.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::publishers-and-subscribers.ad[tabsize=2]
+include::publishers-and-subscribers.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::nodes.ad[tabsize=2]
+include::nodes.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::configurations.ad[tabsize=2]
+include::configurations.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::nodemanager.ad[tabsize=2]
+include::nodemanager.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::module.ad[tabsize=2]
+include::module.adoc[tabsize=2]

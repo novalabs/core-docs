@@ -17,8 +17,8 @@ CAUTION: The tutorials are Work In Progress...
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::bootstrap.ad[tabsize=2]
+include::bootstrap.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::workspace.ad[tabsize=2]
+include::workspace.adoc[tabsize=2]

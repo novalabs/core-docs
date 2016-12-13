@@ -33,28 +33,28 @@ Each JSON file has it's own Apache AVRO footnoteref:[AVRO, Apache AVRO https://a
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::package.ad[tabsize=2]
+include::package.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::message.ad[tabsize=2]
+include::message.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::node.ad[tabsize=2]
+include::node.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::configuration.ad[tabsize=2]
+include::configuration.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::module.ad[tabsize=2]
+include::module.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::workspace.ad[tabsize=2]
+include::workspace.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::moduletarget.ad[tabsize=2]
+include::moduletarget.adoc[tabsize=2]

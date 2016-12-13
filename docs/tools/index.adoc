@@ -31,16 +31,16 @@ References
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::core.ad[tabsize=2]
+include::core.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::package.ad[tabsize=2]
+include::package.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::module.ad[tabsize=2]
+include::module.adoc[tabsize=2]
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-include::workspace.ad[tabsize=2]
+include::workspace.adoc[tabsize=2]
