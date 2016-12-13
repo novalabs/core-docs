@@ -1,17 +1,16 @@
 = Nova Core Documentation
 
 == Reference Manuals
-link:getting-started/index.html[Getting Started]
+
+<<getting-started/index.adoc#,Getting Started>>
 
 <<hw/index.adoc#,Hardware>>
 
-anchor:hardware-overview[]test
+<<core/index.adoc#,Core>>
 
-link:core/index.html[Core]
+<<mw/index.adoc#,Core Middleware>>
 
-link:mw/index.html[Core Middleware]
-
-link:tools/index.html[Core Tools]
+<<tools/index.adoc#,Core Tools>>
 
 == Tutorials
-link:tutorials/index.html[Tutorials]
+<<tutorials/index.adoc#,Tutorials>>
