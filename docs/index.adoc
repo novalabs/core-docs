@@ -3,7 +3,9 @@
 == Reference Manuals
 link:getting-started/index.html[Getting Started]
 
-link:getting-started/index.html[Hardware]
+<<hw/index.adoc#,Hardware>>
+
+anchor:hardware-overview[]test
 
 link:core/index.html[Core]
 
