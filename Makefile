@@ -22,4 +22,4 @@ prepare:
 html: $(HTML_FILES)
 
 $(HTML_BASEPATH)/%.html: $(SRC_BASEPATH)/%.adoc
-	asciidoctor -b html5 -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -o $@ $<
+	asciidoctor -b html5 -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a data-uri -a icons=font -a source-highlighter=coderay -a plantuml_format=png -o $@ $<
