@@ -11,7 +11,7 @@ print-%:
 
 .PHONY : clean prepare html
 
-all: clean prepare html pdf
+all: clean prepare html
 
 clean:
 	@rm -rf $(HTML_BASEPATH)
@@ -21,10 +21,5 @@ prepare:
 
 html: $(HTML_FILES)
 
-pdf: $(PDF_FILES)
-
 $(HTML_BASEPATH)/%.html: $(SRC_BASEPATH)/%.adoc
 	asciidoctor -b html5 -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -o $@ $<
-
-$(PDF_BASEPATH)/%.pdf: $(SRC_BASEPATH)/%.adoc
-	asciidoctor-pdf -b pdf -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=3 -a icons=font -a source-highlighter=coderay -a plantuml_format=png -o $@ $<
