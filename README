@@ -1,1 +1,20 @@
-asciidoctor -r asciidoctor-diagram -a experimental -a toc=left -a toclevels=4 -a icons=font -a source-highlighter=coderay -a plantuml_format=png <file>
+# Nova Core documentation
+[![Build Status](https://travis-ci.org/novalabs/core-docs.svg?branch=master)](https://travis-ci.org/novalabs/core-docs)
+
+## Install prerequisites
+
+'''bash
+sudo apt-get install -y graphviz
+'''
+
+'''bash
+gem install asciidoctor
+gem install asciidoctor-diagram
+gem install coderay
+'''
+
+## Render HTML output
+
+'''bash
+make
+'''
