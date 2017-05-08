@@ -12,7 +12,7 @@ image::io_module-wiring.png[Layout, 480]
 [[specifications]]
 == Specifications
 
-.Processor
+.Microcontroller
 include::../common/stm32f303_specs.adoc[]
 
 .Interfaces
@@ -71,7 +71,5 @@ include::../common/dac_pinout.adoc[]
 .Core Bus
 include::../common/core_bus_pinout.adoc[]
 
-.JTAG
+.JTAG/SWD
 include::../common/jtag_pinout.adoc[]
-
-================

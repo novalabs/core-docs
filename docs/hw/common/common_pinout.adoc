@@ -1,7 +1,0 @@
-[[common-pinout]]
-
-.Core Bus
-include::core_bus_pinout.adoc[]
-
-.JTAG
-include::jtag_pinout.adoc[]

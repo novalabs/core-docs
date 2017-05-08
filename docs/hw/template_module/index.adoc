@@ -39,7 +39,5 @@ include::../common/stm32f303_specs.adoc[]
 .Core Bus
 include::../common/core_bus_pinout.adoc[]
 
-.JTAG
+.JTAG/SWD
 include::../common/jtag_pinout.adoc[]
-
-================
