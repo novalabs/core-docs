@@ -1,5 +1,5 @@
-[width="50%",cols=">20%m,<30%m,>20%m,<30%m",frame="topbot",options="header"
-]6|================
+[width="50%",cols=">20%m,<30%m,>20%m,<30%m",frame="topbot",options="header"]
+|================
 |Pin # |Name    |Pin # |Name
 |1     |VCC     |2     |SWDIO
 |3     |GND     |4     |SWCLK
