@@ -12,8 +12,11 @@ image::udc_module-wiring.png[Layout, 480]
 [[specifications]]
 == Specifications
 
-.Processor
+.Microcontroller
 include::../common/stm32f303_specs.adoc[]
+
+.H-bridge
+include::../common/mc33826_specs.adoc[]
 
 [[voltage_ratings]]
 == Voltage Ratings

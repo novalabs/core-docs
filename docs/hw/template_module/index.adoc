@@ -12,7 +12,7 @@ image::XXX_module-wiring.png[Layout, 480]
 [[specifications]]
 == Specifications
 
-.Processor
+.Microcontroller
 include::../common/stm32f303_specs.adoc[]
 
 [[voltage_ratings]]
