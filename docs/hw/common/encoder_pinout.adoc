@@ -1,0 +1,12 @@
+[width="50%",cols=">20%,<30%,<50%",frame="topbot",options="header"]
+|================
+|Pin # |Name    |Description
+|1     |VCC     |Power supply (5V)
+|2     |GND     |Ground
+|3     |A       |Channel A
+|4     |B       |Channel B
+|5     |I       |Index
+|6     |ANALOG  |Analog input
+|================
+
+The encoder port connector is a 6-pin 1.25mm Molex Picoblade (PN 53047-06).

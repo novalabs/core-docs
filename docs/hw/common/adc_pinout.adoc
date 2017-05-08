@@ -8,3 +8,5 @@
 |5     |A3      |Analog input (0-3.3V)
 |6     |A4      |Analog input (0-3.3V)
 |================
+
+The ADC port connector is a 6-pin 1.25mm Molex Picoblade (PN 53047-06).

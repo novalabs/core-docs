@@ -6,3 +6,5 @@
 |3     |SCL     |Clock
 |4     |SDA     |Data
 |================
+
+The I2C port connector is a 4-pin 1.25mm Molex Picoblade (PN 53047-04).

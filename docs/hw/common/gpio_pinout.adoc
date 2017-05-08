@@ -8,3 +8,5 @@
 |5     |D3      |Digital I/O
 |6     |D4      |Digital I/O
 |================
+
+The GPIO port connector is a 6-pin 1.25mm Molex Picoblade (PN 53047-06).

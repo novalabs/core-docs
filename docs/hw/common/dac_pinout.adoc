@@ -6,3 +6,5 @@
 |3     |O1      |Analog output (0-3.3V)
 |4     |O2      |Analog output (0-3.3V)
 |================
+
+The DAC port connector is a 4-pin 1.25mm Molex Picoblade (PN 53047-04).
