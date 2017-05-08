@@ -1,0 +1,52 @@
+[[udc-module]]
+= uDC module
+
+[[description]]
+Drives motors up to 70 W, with torque, speed, and position closed loop control.
+
+[[layout]]
+== Layout
+
+image::udc_module-wiring.png[Layout, 480]
+
+[[specifications]]
+== Specifications
+
+.Processor
+include::../common/stm32f303_specs.adoc[]
+
+[[voltage_ratings]]
+== Voltage Ratings
+
+.Recommended Operating Conditions
+[width="100%",cols="<50%,^20%,^10%,^10%,^10%",frame="topbot",options="header"]
+|================
+|Parameter            |Symbol |MIN | MAX |Units
+|Bus supply voltage   |Vbus   |5   | 48  |V
+|Motor supply voltage |Vmot   |5   | 24  |V
+|================
+
+.Absolute Maximum Ratings
+[width="100%",cols="<50%m,^20%,^20%,^10%",frame="topbot",options="header"]
+|================
+|Parameter            |Symbol |Rating |Units
+|Bus supply voltage   |Vbus   |0 to 60 |V
+|Motor supply voltage |Vmot   |0 to 28 |V
+|================
+
+[[pinout]]
+== Pinout
+
+.Encoder 2 port
+include::../common/encoder_pinout.adoc[]
+
+.Encoder 2 port
+include::../common/core_bus_pinout.adoc[]
+
+.Core Bus
+include::../common/core_bus_pinout.adoc[]
+
+.JTAG
+include::../common/jtag_pinout.adoc[]
+
+================
