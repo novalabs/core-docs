@@ -43,16 +43,12 @@ include::../common/mc33826_specs.adoc[]
 .Encoder 1
 The encoder 1 interface allows to connect position / speed encoders with digital quadrature output or analog output.
 
-The encoder 1 port connector is a 6-pin 1.25mm Molex Picoblade (PN 53047-06).
-
 .Encoder 1 pinout
 include::../common/encoder_pinout.adoc[]
 
 .Encoder 2
 The encoder 2 interface allows to connect position / speed encoders with digital quadrature output or analog output.
 The encoder 2 can also be used as SPI interface to integrate additional devices.
-
-The encoder 2 port connector is a 6-pin 1.25mm Molex Picoblade (PN 53047-06).
 
 .Encoder 2 pinout (Encoder mode)
 include::../common/encoder_pinout.adoc[]
