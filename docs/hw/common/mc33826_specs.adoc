@@ -1,5 +1,6 @@
 - MC338265 monolithic H-Bridge
 - 5.0 A peak current
+- 3.0 A continuous current
 - 225 mOhm maximum R~DS,on~
 - Load current feedback (0.24%of load current)
 - Overcurrent limit

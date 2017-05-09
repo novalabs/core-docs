@@ -9,4 +9,4 @@
 |6     |ANALOG  |Analog input
 |================
 
-The encoder port connector is a 6-pin 1.25mm Molex Picoblade (PN 53047-06).
+The encoder port connector is a 6-pin 1.25mm Molex Picoblade (PN 53047-0610, mating connector PN 51021-0600).

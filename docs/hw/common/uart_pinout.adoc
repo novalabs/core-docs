@@ -7,4 +7,4 @@
 |4     |RX      |Receive
 |================
 
-The UART port connector is a 4-pin 1.25mm Molex Picoblade (PN 53047-04).
+The UART port connector is a 4-pin 1.25mm Molex Picoblade (PN 53047-0410, mating connector PN 51021-0410).

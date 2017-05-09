@@ -6,3 +6,5 @@
 |3     |CANL    |CAN Low
 |4     |CANH    |CAN High
 |================
+
+The CORE bus connector is a 4-pin 2 mm JST PA (PN B04B-PASK, mating connector PN PAP-04V-S).

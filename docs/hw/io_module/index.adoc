@@ -7,7 +7,7 @@ Integrate existing hardware into the real-time Nova Core bus with analog and dig
 [[layout]]
 == Layout
 
-image::io_module-wiring.png[Layout, 480]
+image::io_module-wiring.png[Layout, 480, align="center"]
 
 [[specifications]]
 == Specifications

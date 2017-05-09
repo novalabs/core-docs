@@ -7,3 +7,5 @@
 |7     |N/U     |8     |N/U
 |9     |GND     |10    |RESET
 |================
+
+The JTAG port connector is a standard 10-pin 1.27mm Cortex-M JTAG connector.
