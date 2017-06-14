@@ -3,7 +3,7 @@
 
 [[tutorial-workspace-overview]]
 === Overview
-In this tutorial it will be shown how to use the CLI tools to manage a workspace.
+In this tutorial we will learn how to use the CLI tools to manage a workspace.
 
 [[tutorial-workspace-initialization]]
 === Step I: initialization
@@ -15,29 +15,38 @@ To create the structure and the JSON file the `CoreWorkspace.py initialize` comm
 =================
 [listing.console]
 ----
-$ cd ~/core_tutorial
-$ source core/setup.sh
 $ mkdir my_workspace
 $ cd my_workspace
 $ CoreWorkspace.py initialize
 ----
-
-generates the following files and directories:
-
+The expected output is:
 ----
+Workspace initialized.
+You can now do a 'source setup.sh'
+
+SUCCESS
+=================
+
+The workspace now contains the following folders:
+
+=================
+[listing.console]
 .
 ├── build
 │   ├── debug
+│   ├── params
 │   └── release
 ├── generated
 │   ├── modules
-│   └── packages
-├── setup.sh
-├── sources
 │   ├── packages
+│   └── params
+├── setup.sh
+├── src
+│   ├── modules
+│   ├── packages
+│   ├── params
 │   └── targets
 └── WORKSPACE.json
-----
 =================
 
 A `setup.sh` file is also generated. This files sets the environments variable needed by the workspace. It includes the Core `setup.sh` file, so you just need to source it.
@@ -48,35 +57,49 @@ TIP: use the `--force` option to re-create the JSON and setup.sh files, without 
 === Step II: add a target
 An empty workspace is pretty useless, so the first thing to do is to add a target to it (link:../core/index.html#coremoduletarget-reference[here] there are the details).
 
-To add a target to the workspace the `CoreWorkspace.py target add` command is provided.
+To add a target to the workspace the `CoreWorkspace.py target add` command is provided. The first parameter specifies the target type (i.e., the Core module to which the code will be deployed), while the second parameter specifies the name of the target instance in your workspace (i.e., motor_test)
 
 .Adding a target
 =================
 [listing.console]
 ----
 $ source setup.sh
-$ CoreWorkspace.py target add usb usb_gateway
+$ CoreWorkspace.py target add udc motor_test
 ----
-
-the tree is now:
-
+The expected output is:
 ----
+Using Core module 'udc'
+
+SUCCESS
+=================
+
+The workspace content now is:
+
+=================
+[listing.console]
 .
 ├── build
 │   ├── debug
+│   ├── params
 │   └── release
 ├── generated
 │   ├── modules
-│   └── packages
-├── setup.sh
-├── sources
 │   ├── packages
+│   └── params
+├── setup.sh
+├── src
+│   ├── modules
+│   ├── packages
+│   ├── params
+│   │   └── motor_test
+│   │       └── default.json
 │   └── targets
-│       └── usb_gateway
+│       └── motor_test
 │           ├── main.cpp
-│           └── MODULE_TARGET.json
+│           ├── MODULE_TARGET.json
+│           ├── PARAMETERS.default.json
+│           └── PARAMETERS.json
 └── WORKSPACE.json
-----
 =================
 
 [[tutorial-workspace-ls]]
@@ -84,44 +107,61 @@ the tree is now:
 Now we have something in the workspace. But what do we have exactly?
 
 To inspect the content of a workspace the `CoreWorkspace.py ls` command is provided.
+It lists the content of the workspace, and all the dependencies needed to build it.
 
-.ls
+.Inspecting the workspace
 =================
 [listing.console]
 ----
 $ CoreWorkspace.py ls
 ----
 
-lists the content of the workspace, and all the dependencies needed to build it:
+The expected output is:
 
 ----
-╒══════════════════════════════════════════════════════════════════════════════╕
-│ WORKSPACE                                                                    │
-╘══════════════════════════════════════════════════════════════════════════════╛
-=== TARGETS ====================================================================
-Name: usb_gateway
-Description: usb_gateway
-Module: usb
-Root: sources/targets/usb_gateway
+= WORKSPACE
 
+== PARAMETERS
 
+Type: motor_test
+Name: uDC module template configuration
+Description: src/targets/motor_test
 
-=== PACKAGE DEPENDENCIES =======================================================
-Package: common_msgs
+== PACKAGE DEPENDENCIES
+
+Package: MC33926_driver
 Source: Core
 Notes: 
 
-Package: led
+Package: QEI_driver
 Source: Core
 Notes: 
 
+...
 
+== MODULE DEPENDENCIES
 
-=== MODULE DEPENDENCIES ========================================================
-Module: usb
+Module: udc
 Source: Core
 Notes: 
 
+== MODULE TARGETS
+
+Type: application
+Name: motor_test
+Description: motor_test
+Module: udc
+OS Version: CHIBIOS_16
+Root: src/targets/motor_test
+Status: OK
+
+== PARAMETER TARGETS
+
+Name: default
+Description: Default configuration
+Parameters: motor_test
+Root: src/params
+Status: OK
 
 SUCCESS
 ----
@@ -129,35 +169,37 @@ SUCCESS
 
 [[tutorial-workspace-generate]]
 === Step IV: generate
-Now that we have a target, it is time to generate all the code, CMake files, Makefiles, Eclipse project, ...
+Now that we have a workspace and a target, it is time to generate the corresponding files: the code, CMake files, Documentation, Eclipse project.
 
-To add a target to the workspace the `CoreWorkspace.py generate` command is provided.
+To generate the code `CoreWorkspace.py generate` command is provided.
+All the generated files will be inside the `generated` directory.
 
-.Generating
+.Generate
 =================
 [listing.console]
 ----
-$ CoreWorkspace.py generate debug
+$ CoreWorkspace.py generate
 ----
-
-----
-----
+The command output shows details about allgenerated code.
 =================
+
 
 [[tutorial-workspace-build]]
 === Step V: build
-Now that we have the Makefiles, we can build the targets...
+Now that we have the generated source code, we can build the targets.
 
-To build a target, you must use `make`...
+To build a target, you must call `make` from its build directory.
 
 .Building a target
 =================
 [listing.console]
 ----
-$ cd build/debug/usb_gateway
+$ cd build/debug/motor_test
 $ make
 ----
-
+The output will show the compile process, and a successfull build will finish with:
 ----
+[100%] Linking CXX executable firmware
+[100%] Built target firmware
 ----
 =================

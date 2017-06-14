@@ -3,22 +3,39 @@
 
 [[tutorial-bootstrap-overview]]
 === Overview
-In this tutorial it will be shown how to bootstrap a Core distribution.
+In this tutorial we will learn how to bootstrap a Core distribution.
 
-[[tutorial-workspace-initialization]]
-=== Step I: bootstrapping
+[[tutorial-bootstrap-get-core]]
+=== Step I: Install Core
 
-.Bootstrapping
+.Install Core
 =================
 [listing.console]
 ----
-$ mkdir ~/core_tutorial <1>
-$ cd ~/core_tutorial
+$ mkdir ~/core-sdk <1>
+$ cd ~/core-sdk
 $ wget -qO- http://get-core.novalabs.io/ | sh <2>
 ----
-<1> `~/core_tutorial` will be the home for all the tutorials that follow
-<2> here the magic happens.
-----
+<1> `~/core-sdk` will be the Core distribution installation folder
+<2> here the magic happens
 =================
 
 WARNING: The installation script will ask you to give him either the root or sudo password. Do not worry: it is just to install the prerequisites (link:../getting-started/index.html[here] there are the details).
+
+[[tutorial-bootstrap-environment]]
+=== Step II: setup the Core environment
+
+To setup the Core environment some environment variables needs to be configured in order to let the build system find tools and sources.
+
+.Setup the core Environment
+=================
+[listing.console]
+----
+$ cd ~/core-sdk
+$ source core/setup.sh <1>
+----
+<1> sets the needed environmental variables
+=================
+
+TIP: Environmental variables must be set in each terminal, to avoid sourcing `setup.sh` in every new terminal you can add a line to your `~/.bashrc` file: `echo source ~/core-sdk/core/setup.sh >> ~/.bashrc`
+
