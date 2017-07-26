@@ -1,0 +1,10 @@
+[width="50%",cols=">20%,<30%,<50%",frame="topbot",options="header"]
+|================
+|Pin # |Name    |Description
+|1     |VCC     |Power supply (3.3V)
+|2     |GND     |Ground
+|3     |A       |Analog input - Digital I/O
+|4     |D       |Digital I/O
+|================
+
+The Proximity sensor port connector is a 4-pin 1.25mm Molex Picoblade (PN 53047-0410, mating connector PN 51021-0410).
