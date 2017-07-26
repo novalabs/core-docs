@@ -7,5 +7,7 @@
 
 <<io_module/index.adoc#,IO module>>
 
+<<proximity_module/index.adoc#,Proximity module>>
+
 <<udc_module/index.adoc#,uDC module>>
 
